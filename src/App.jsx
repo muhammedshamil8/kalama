@@ -18,7 +18,7 @@ function App() {
         <div className="mt-10 flex flex-col gap-5">
           <img src={Aikiam} alt="Aikiam" className='h-6 md:h-10' />
           <div className="flex gap-2 flex-col">
-            <img src={Kaloolsavm} alt="Kaloolsavm" className='h-16 md:h-[70px]' />
+            <img src={Kaloolsavm} alt="Kaloolsavm" className='h-16 md:h-[60px]' />
             <img src={date} alt="date" className='h-[14px] md:h-[18px]' />
           </div>
         </div>
