@@ -12,7 +12,7 @@ function App() {
   return (
     <>
       <div
-        className={`h-screen flex items-center flex-col gap-20  select-none transition-opacity duration-[2000ms]  ${isLoaded ? 'opacity-100' : 'opacity-0'
+        className={`h-screen flex items-center flex-col gap-16 md:gap-20  select-none transition-opacity duration-[2000ms]  ${isLoaded ? 'opacity-100' : 'opacity-0'
           }`}
       >
         <div className="mt-10 flex flex-col gap-5">
