@@ -1,17 +1,51 @@
-import { useEffect, useState } from 'react';
-import { Aikiam, Coming_Soon, Kalaama, Kaloolsavm, our_logo, Coming_Soon_lap, date } from './assets';
 import { Home, NotFound, Result, Schedule, Stage, ScoreBoard } from './pages';
+import Layout from '@/components/layout';
 import { Routes, Route, Navigate } from "react-router-dom";
+
+const routes = [
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
+      {
+        path: "",
+        element: <Home />,
+      },
+      {
+        path: "result",
+        element: <Result />,
+      },
+      {
+        path: "schedule",
+        element: <Schedule />,
+      },
+      {
+        path: "stage/:id",
+        element: <Stage />,
+      },
+      {
+        path: "scoreboard",
+        element: <ScoreBoard />,
+      },
+    ],
+  },
+  {
+    path: "*",
+    element: <NotFound />,
+  },
+];
+
 
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/result" element={<Result />} />
-      <Route path="/schedule" element={<Schedule />} />
-      <Route path="/stage/:id" element={<Stage />} />
-      <Route path="/scoreboard" element={<ScoreBoard />} />
-      <Route path="*" element={<Navigate to="/404" />} />
+      {routes.map(({ path, element, children }) => (
+        <Route key={path} path={path} element={element}>
+          {children?.map(({ path: childPath, element: childElement }) => (
+            <Route key={childPath} path={childPath} element={childElement} />
+          ))}
+        </Route>
+      ))}
     </Routes>
   );
 }
