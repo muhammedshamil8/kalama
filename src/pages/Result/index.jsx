@@ -21,9 +21,12 @@ function Index() {
   const ApiUrl = import.meta.env.VITE_API_URL;
   const [programs, setPrograms] = useState([]);
   const [filteredPrograms, setFilteredPrograms] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [loadingPoster, setLoadingPoster] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       try {
         const response = await fetch(`${ApiUrl}/events/resultPublished`);
         const data = await response.json();
@@ -31,6 +34,8 @@ function Index() {
         setPrograms(data?.data);
       } catch (error) {
         console.error(error);
+      } finally {
+        setLoading(false);
       }
     }
     fetchData();
@@ -48,8 +53,7 @@ function Index() {
 
   const handleProgramSelect = async (program) => {
     setSelectedProgram(program);
-    setIsDialogOpen(true);
-
+    setLoadingPoster(true);
     try {
       const response = await fetch(`${ApiUrl}/result/event/${program._id}`, {
         method: 'GET',
@@ -119,6 +123,7 @@ function Index() {
       }));
 
       setSelectedProgram(formattedData[0]);
+      setIsDialogOpen(true);
       console.log(formattedData[0]);
       // console.log(formattedData[0]);
       // console.log(program)
@@ -126,6 +131,8 @@ function Index() {
     } catch (error) {
       console.error('Failed to select program', error);
       // setLoadingPoster(false);
+    } finally {
+      setLoadingPoster(false);
     }
   };
 
@@ -227,18 +234,26 @@ function Index() {
         {/* Program List */}
         <div className='mt-10 w-full mx-auto'>
           <div className='flex flex-wrap gap-4 items-center justify-center w-full mx-auto'>
-            {filteredPrograms.length > 0 ? (
-              filteredPrograms.map((program, index) => (
-                <div
-                  onClick={() => handleProgramSelect(program)}
-                  key={index}
-                  className='bg-[#605F5F] border-[2px] cursor-pointer border-b-[4px] border-black px-4 py-1 text-white font-semibold  rounded-none shadow-md flex items-center justify-center '
-                >
-                  {program?.name}
-                </div>
-              ))
+            {!loading ? (
+              <>
+                {filteredPrograms.length > 0 ? (
+                  filteredPrograms.map((program, index) => (
+                    <div
+                      onClick={() => handleProgramSelect(program)}
+                      key={index}
+                      className='bg-[#605F5F] border-[2px] cursor-pointer border-b-[4px] border-black px-4 py-1 text-white font-semibold  rounded-none shadow-md flex items-center justify-center '
+                    >
+                      {program?.name}
+                    </div>
+                  ))
+                ) : (
+                  <p className='text-gray-500'>No programs found.</p>
+                )}
+              </>
             ) : (
-              <p className='text-gray-500'>No programs found.</p>
+              <div className='flex items-center justify-center w-full py-6'>
+                <Loader className='animate-spin' />
+              </div>
             )}
           </div>
         </div>
@@ -250,11 +265,44 @@ function Index() {
             <DialogTitle></DialogTitle>
             <DialogDescription></DialogDescription>
             <div className='pb-10'>
-              <div className='h-[400px]'>
+              <div className='min-h-[400px]'>
+                {loadingPoster ? (
+                  <div className='flex items-center justify-center py-4'>
+                    <Loader className='animate-spin' />
+                  </div>
+                ) : (
+                  <div id="resultPosterId" className="w-full h-full bg-gradient-to-r from-blue-500 to-teal-400 border border-black  p-8">
+                    {/* Program Title */}
+                    <h1 className="font-bold text-3xl text-center text-white mb-4">{selectedProgram?.programName}</h1>
 
-                <div id='resultPosterId' className='w-full h-full bg-red-500 border border-black'>
-                  <h1 className='flex items-center justify-center font-bold py-10 text-xl'>Result Poster</h1>
-                </div>
+                    {/* Displaying the program result number */}
+                    <div className="flex justify-center my-2">
+                      <span className="bg-teal-500 text-white py-2 px-4 rounded-full text-lg">{`Result #${selectedProgram.result_no}`}</span>
+                    </div>
+                    {/* Displaying the winner's details dynamically */}
+                    <div className="flex flex-col items-center bg-white p-4 rounded-lg shadow-xl">
+                      <h2 className="text-xl font-semibold text-gray-800 mb-4">Winners</h2>
+
+                      {/* Map through the winners array */}
+                      {selectedProgram.winners.map((winner, index) => (
+                        <div key={index} className="mb-6">
+                          <div className="text-lg font-bold text-blue-700 mb-2">{`Winner #${winner.position}: ${winner.participants[0].name}`}</div>
+                          <div className="text-md text-gray-600">{winner.participants[0].department}</div>
+                          <div className="text-sm text-gray-500">{`Year: ${winner.participants[0].year}`}</div>
+                        </div>
+                      ))}
+                    </div>
+
+
+                    {/* Displaying the stage status */}
+                    <div className="mt-4 text-center">
+                      <span className={`py-2 px-4 rounded-full text-white font-bold ${selectedProgram.stageStatus === "on_stage" ? "bg-green-500" : "bg-gray-500"}`}>
+                        {selectedProgram.stageStatus === "on_stage" ? "On Stage" : "Off Stage"}
+                      </span>
+                    </div>
+                  </div>
+                )}
+
                 <div className='grid grid-cols-3  border border-black  bg-white'>
 
                   <div className='col-span-2 flex  items-center justify-center gap-3 bg-[#276692] relative '>

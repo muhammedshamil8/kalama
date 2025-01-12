@@ -17,7 +17,7 @@ function Stage() {
       <section className='p-3 max-w-[600px] mx-auto mt-6'>
         <div className='border-black border p-2'>
 
-          <h1 className="text-center text-2xl font-bold mb-2 bg-black text-white p-4">{stageDetails.name}</h1>
+          <h1 className="text-center text-2xl font-bold mb-2 bg-black text-white p-4">{stageDetails.name || 'Stage Name'}</h1>
 
           <div className="max-w-[600px] mx-auto space-y-4 border border-black p-2">
             {stagePrograms.length > 0 ? (

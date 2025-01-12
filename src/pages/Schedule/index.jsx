@@ -14,6 +14,14 @@ function Schedule() {
     navigate(`/stage/${id}`);
   }
 
+  function pickColor(rank) {
+    const colors = ['border-b-[5px] border-b-[#276692]', 'border-b-[5px] border-b-[#00A99D]', 'border-b-[5px] border-b-[#8DC63F]'];
+
+    return colors[(rank - 1) % colors.length];
+  }
+
+
+
   return (
     <div className="w-full">
       <Header title="Schedule" href="/" />
@@ -40,7 +48,7 @@ function Schedule() {
         {/* Stage Display */}
         <div className="space-y-4 max-w-[600px] mx-auto px-4">
           {stages[selectedDate]?.map((stage, index) => (
-            <div className='p-1  border-2 border-black max-w-[400px] mx-auto'
+            <div className={`p-1  border-2 border-black max-w-[400px] mx-auto ${pickColor(index + 1)}`}
               key={stage.id}
             >
               <div
