@@ -2,49 +2,11 @@ import React, { useState } from 'react';
 import Header from '@/components/ui/Header';
 import { useNavigate } from 'react-router-dom';
 
+import { stages, dates } from '@/const/StageData';
+
 function Schedule() {
   const navigate = useNavigate();
-  const dates = [
-    '19-01-25',
-    '20-01-25',
-    '21-01-25',
-    '22-01-25',
-    '23-01-25',
-    '24-01-25',
-  ];
 
-  const stages = {
-    '19-01-25': [
-      { id: 101, name: 'Main Arena', stage: 'Stage 1' },
-      { id: 102, name: 'Community Hall', stage: 'Stage 2' },
-      { id: 103, name: 'Green Lounge', stage: 'Stage 3' },
-    ],
-    '20-01-25': [
-      { id: 201, name: 'The Plaza', stage: 'Stage 1' },
-      { id: 202, name: 'Concert Hall', stage: 'Stage 2' },
-    ],
-    '21-01-25': [
-      { id: 301, name: 'Sports Complex', stage: 'Stage 1' },
-      { id: 302, name: 'Event Deck', stage: 'Stage 2' },
-      { id: 303, name: 'Sky Dome', stage: 'Stage 3' },
-      { id: 304, name: 'Open Field', stage: 'Stage 4' },
-    ],
-    '22-01-25': [
-      { id: 401, name: 'Grand Ballroom', stage: 'Stage 1' },
-      { id: 402, name: 'Clubhouse', stage: 'Stage 2' },
-    ],
-    '23-01-25': [
-      { id: 501, name: 'Riverside Pavilion', stage: 'Stage 1' },
-      { id: 502, name: 'Community Theater', stage: 'Stage 2' },
-      { id: 503, name: 'Garden Tent', stage: 'Stage 3' },
-    ],
-    '24-01-25': [
-      { id: 601, name: 'Amphitheater', stage: 'Stage 1' },
-      { id: 602, name: 'Innovation Hub', stage: 'Stage 2' },
-      { id: 603, name: 'Creative Studio', stage: 'Stage 3' },
-      { id: 604, name: 'Workshop Area', stage: 'Stage 4' },
-    ],
-  };
 
   const [selectedDate, setSelectedDate] = useState(dates[0]);
 
@@ -64,8 +26,8 @@ function Schedule() {
               <button
                 key={date}
                 onClick={() => setSelectedDate(date)}
-                className={`px-4 snap-start py-2  whitespace-nowrap border border-black ${selectedDate === date
-                  ? 'bg-[#B99814] text-black font-bold'
+                className={`px-3 snap-start py-1.5  whitespace-nowrap border-2 border-black hover:bg-[#276692]/90 hover:border-[#276692] hover:text-white transition-all ease-in-out ${selectedDate === date
+                  ? 'bg-[#276692] text-white font-bold border !border-[#276692]'
                   : 'bg-white '
                   }`}
               >
@@ -76,28 +38,25 @@ function Schedule() {
         </div>
 
         {/* Stage Display */}
-        <div className="space-y-4 max-w-[600px] mx-auto ">
-          {stages[selectedDate]?.map((stage) => (
-            <div
+        <div className="space-y-4 max-w-[600px] mx-auto px-4">
+          {stages[selectedDate]?.map((stage, index) => (
+            <div className='p-1  border-2 border-black max-w-[400px] mx-auto'
               key={stage.id}
-              onClick={() => handleSelectStage(stage.id)}
-              className={`p-4  border border-black bg-clip-content text-center ${stage.stage === 'Stage 1'
-                ? 'bg-black text-white'
-                : stage.stage === 'Stage 2'
-                  ? 'bg-gray-300'
-                  : stage.stage === 'Stage 3'
-                    ? 'bg-gray-500 text-white'
-                    : 'bg-gray-700 text-white'
-                }`}
             >
-              <h2 className="text-md font-bold p-2 pb-0 ">{stage.stage}</h2>
-              <p className="text-xl font-black p-2">{stage.name}</p>
+              <div
+                onClick={() => handleSelectStage(stage.id)}
+                className={`p-2 text-center text-white cursor-pointer ${(index + 1) % 2 === 0 ? 'bg-[#605F5F]' : 'bg-black'
+                  }`}
+              >
+                <h2 className="text-md font-bold  pb-0 ">{stage.stage}</h2>
+                <p className="text-2xl font-black uppercase">{stage.name}</p>
+              </div>
             </div>
           ))}
         </div>
-      </section>
+      </section >
 
-    </div>
+    </div >
   );
 }
 

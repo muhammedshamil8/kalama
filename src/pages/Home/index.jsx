@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 function Index() {
   const navigate = useNavigate();
   return (
-    <div className="flex flex-col h-full gap-10 justify-around py-10 mx-auto">
+    <div className="flex flex-col justify-around gap-10 min-h-[calc(100vh-100px)] py-10 mx-auto  w-full">
       {/* Logo Aikiam */}
       <div className="flex justify-center">
         <img src={Logo_aikiam} alt="Aikiam Logo" className="" />
