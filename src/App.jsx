@@ -1,6 +1,8 @@
 import { Home, NotFound, Result, Schedule, Stage, ScoreBoard } from './pages';
 import Layout from '@/components/layout';
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import ReactGA from "react-ga4";
+import { useEffect } from 'react';
 
 const routes = [
   {
@@ -37,6 +39,20 @@ const routes = [
 
 
 function App() {
+
+  const location = useLocation();
+  const GAID = import.meta.env.VITE_GA_ID;
+
+  // Initialize Google Analytics
+  useEffect(() => {
+    ReactGA.initialize(GAID);
+  }, []);
+
+  // Track page views on route change
+  useEffect(() => {
+    ReactGA.send({ hitType: "pageview", page: location.pathname });
+  }, [location]);
+
   return (
     <Routes>
       {routes.map(({ path, element, children }) => (
