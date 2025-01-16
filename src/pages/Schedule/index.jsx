@@ -34,7 +34,7 @@ function Schedule() {
               <button
                 key={date}
                 onClick={() => setSelectedDate(date)}
-                className={`px-3 snap-start py-1.5  whitespace-nowrap border-2 border-black hover:bg-[#276692]/90 hover:border-[#276692] hover:text-white transition-all ease-in-out ${selectedDate === date
+                className={`px-3 snap-start py-[5px]  whitespace-nowrap border-2 border-black hover:bg-[#276692]/90 hover:border-[#276692] hover:text-white transition-all ease-in-out ${selectedDate === date
                   ? 'bg-[#276692] text-white font-bold border !border-[#276692]'
                   : 'bg-white '
                   }`}

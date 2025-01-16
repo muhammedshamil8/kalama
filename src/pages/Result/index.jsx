@@ -13,6 +13,7 @@ import {
 import { Share2, Download, Loader } from 'lucide-react'
 import html2canvas from 'html2canvas';
 import ReactGA from "react-ga4";
+import Poster from './components/Poster';
 
 function Index() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -323,6 +324,9 @@ function Index() {
           </DialogHeader>
         </DialogContent>
       </Dialog>
+
+
+      <Poster />
     </div >
   );
 }
