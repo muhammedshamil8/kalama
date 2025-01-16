@@ -1,193 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import Header from '@/components/ui/Header';
-import { Star, pradhiba, BgRank } from '@/assets/elements';
-import classNames from 'classnames';
+import CollegeTab from './components/collegeTab';
+import IndividualTab from './components/individualTab';
+import { UserRound } from 'lucide-react';
 
 
-
-function CollegeTab({ data }) {
-  console.log(data);
-
-  const BgRank = ({ color }) => (
-    <svg width="60" height="68" viewBox="0 0 47 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <g clipPath="url(#clip0_178_535)">
-        <mask id="mask0_178_535" style={{ maskType: 'luminance' }} maskUnits="userSpaceOnUse" x="0" y="0" width="47" height="48">
-          <path d="M47 0H0V48H47V0Z" fill="white" />
-        </mask>
-        <g mask="url(#mask0_178_535)">
-          <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M4.32508 24.1013C1.95468 24.582 0.167851 26.718 0.167851 29.28L0.16785 42.72C0.16785 45.636 2.48254 48 5.33786 48H18.4979C21.0654 48 23.1959 46.0884 23.5992 43.5828C24.0699 46.0037 26.1614 47.8286 28.67 47.8286H41.83C44.6852 47.8286 47 45.4646 47 42.5486V29.1086C47 26.4864 45.1282 24.3106 42.6751 23.8987C45.0453 23.4179 46.8322 21.282 46.8322 18.72V5.28C46.8322 2.36394 44.5175 7.14946e-07 41.6622 5.87482e-07L28.5022 0C25.9346 -1.1462e-07 23.8041 1.91151 23.4009 4.4171C22.9301 1.99627 20.8387 0.171427 18.33 0.171427H5.17C2.31469 0.171427 0 2.53536 0 5.45143V18.8914C0 21.5136 1.87169 23.6894 4.32508 24.1013Z"
-            fill={color}
-          />
-        </g>
+function CollegeIcon({ color = 'white' }) {
+  return (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g clip-path="url(#clip0_178_480)">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.21925 2.05736C9.64314 1.71823 10.2327 1.69401 10.6803 1.98469L10.7809 2.05736L14.3746 4.93226C14.7304 5.21692 14.9524 5.63326 14.9932 6.08278L15.0001 6.23371V8.33333H16.6667C17.5454 8.33333 18.2652 9.01321 18.3288 9.87561L18.3334 10V16.5833C18.3334 17.0558 17.9759 17.4449 17.5166 17.4946L17.4167 17.5H2.58341C2.11091 17.5 1.7219 17.1425 1.67213 16.6832L1.66675 16.5833V10C1.66675 9.12134 2.34665 8.40153 3.20903 8.33791L3.33341 8.33333H5.00008V6.23371C5.00008 5.77803 5.1865 5.3446 5.512 5.03189L5.62559 4.93226L9.21925 2.05736ZM10.0001 3.56704L6.66675 6.23371V15.8332H13.3334V6.23371L10.0001 3.56704ZM16.6667 10H15.0001V15.8333H16.6667V10ZM5.00008 10H3.33341V15.8333H5.00008V10ZM10.0001 6.66667C11.3808 6.66667 12.5001 7.78596 12.5001 9.16667C12.5001 10.5474 11.3808 11.6667 10.0001 11.6667C8.61933 11.6667 7.50008 10.5474 7.50008 9.16667C7.50008 7.78596 8.61933 6.66667 10.0001 6.66667ZM10.0001 8.33333C9.53983 8.33333 9.16675 8.70642 9.16675 9.16667C9.16675 9.62692 9.53983 10 10.0001 10C10.4603 10 10.8334 9.62692 10.8334 9.16667C10.8334 8.70642 10.4603 8.33333 10.0001 8.33333Z" fill={color} />
       </g>
       <defs>
-        <clipPath id="clip0_178_535">
-          <rect width="47" height="48" fill="" />
+        <clipPath id="clip0_178_480">
+          <path d="M0 8C0 3.58172 3.58172 0 8 0H20V20H8C3.58172 20 0 16.4183 0 12V8Z" fill="none" />
         </clipPath>
       </defs>
     </svg>
   );
-
-  function pickBorderColor(rank) {
-    if (rank === 1) {
-      return 'border-[#276692]'
-    } else if (rank === 2) {
-      return 'border-[#00A99D]'
-    } else if (rank === 3) {
-      return 'border-[#8DC63F]'
-    } else {
-      return 'border-[#000000]'
-    }
-  }
-  
-  function pickBgColor(rank) {
-    if (rank === 1) {
-      return 'bg-[#276692]'
-    } else if (rank === 2) {
-      return 'bg-[#00A99D]'
-    } else if (rank === 3) {
-      return 'bg-[#8DC63F]'
-    } else {
-      return 'bg-[#000000]'
-    }
-  }
-
-  function pickColor(rank) {
-    if (rank === 1) {
-      return '#276692'
-    } else if (rank === 2) {
-      return '#00A99D'
-    } else if (rank === 3) {
-      return '#8DC63F'
-    } else {
-      return '#000000'
-    }
-  }
-
-  return (
-    <div className="p-4">
-      {data.map((college, index) => {
-        const rank = index + 1;
-        return (
-          <div
-            key={rank}
-            className={classNames(`flex justify-around w-full flex-1 items-center p-4 mb-4 border border-b-[3px]  max-w-[380px] mx-auto ${pickBorderColor(rank)}`)}
-          >
-            <div className="flex items-center gap-2 ">
-              <div
-                className="w-14 h-2 relative flex items-center justify-center font-bold text-white mr-4"
-              >
-                <span className="text-4xl z-10"> {rank}</span>
-
-                <div className='-z-10 absolute'>
-                  <BgRank color={pickColor(rank)} />
-                </div>
-              </div>
-              <div className='flex-1 w-full flex flex-col gap-1'>
-                <p className="font-semibold leading-4">{college.collegeName}</p>
-                <hr className={`border-[1.5px] ${pickBorderColor(rank)}`}  />
-                <div className='flex items-end justify-end'>
-                  <span className={`flex items-center justify-center px-2 py-[1px]  text-white font-bold rounded-none border border-black 
-                   ${pickBgColor(rank)}`}>
-                    {college.totalScore} Pts
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        );
-      })}
-    </div >
-  );
 }
-
-function IndividualTab({ data }) {
-  const [expandedCategories, setExpandedCategories] = useState({});
-
-  // Toggle expand/collapse for a specific category
-  const toggleExpand = (index) => {
-    setExpandedCategories((prev) => ({
-      ...prev,
-      [index]: !prev[index], // Toggle the expanded state for this category
-    }));
-  };
-
-  return (
-    <div className="p-4">
-      {data.map((category, index) => {
-        // Only proceed if winners exist in the category
-        if (category.winners.length === 0) return null;
-
-        const isExpanded = expandedCategories[index];
-        const topScorer = category.winners[0];
-        const otherWinners = category.winners.slice(1);
-        const winnersToShow = isExpanded ? category.winners : [topScorer];
-
-        return (
-          <div key={index} className="mb-8">
-            {winnersToShow.length > 0 && (
-              <>
-                {/* Render Top Scorer and Others (if expanded) */}
-                {winnersToShow.map((individual, individualIndex) => (
-                  <div
-                    key={individualIndex}
-                    className="border-b-[4px] border-b-[#00A99D] max-w-[400px] mx-auto mb-4"
-                  >
-                    <div className="border rounded-none border-[#000] flex items-center flex-col gap-2 relative p-3">
-                      <img src={Star} alt="Star" className="absolute -top-2 right-3" />
-                      <img src={pradhiba} alt="Pradhiba" className="absolute bottom-0" />
-                      {/* Category Title Inside Card */}
-                      {individualIndex === 0 && (
-                        <h3 className="text-xl font-bold text-gray-800 mb-4 text-center">
-                          {category?.title}
-                        </h3>
-                      )}
-                      <div className="flex flex-1 w-full justify-around">
-                        <div className="h-24 w-20 bg-gray-300">
-                          <img
-                            src={individual?.image}
-                            alt={individual?.name}
-                            className="h-full w-full object-cover"
-                          />
-                        </div>
-                        <div className="flex flex-col gap-2">
-                          <div className="flex-1">
-                            <p className="font-semibold">{individual?.name}</p>
-                            <p className="text-sm">{individual?.college}</p>
-                          </div>
-                          <hr className="border-[1.5px] border-black" />
-                          <div className="flex items-end justify-end">
-                            <span className="flex items-center justify-center px-2 py-1 bg-[#00A99D] text-white font-bold rounded-none border border-black">
-                              {individual?.points} Pts
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-
-                {/* Show More Button */}
-                {otherWinners.length > 0 && (
-                  <button
-                    onClick={() => toggleExpand(index)}
-                    className="block mx-auto px-4 py-2 bg-[#00A99D] text-white font-bold rounded mt-2"
-                  >
-                    {isExpanded ? 'Show Less' : `Show More (${otherWinners.length} more)`}
-                  </button>
-                )}
-              </>
-            )}
-          </div>
-        );
-      })}
-    </div>
-  );
-}
-
 
 function Index() {
   const [activeTab, setActiveTab] = useState('college');
@@ -223,7 +54,7 @@ function Index() {
                 college: scorer.topScorer.college,
                 points: scorer.topScorer.score,
               }))
-              .sort((a, b) => b.points - a.points), // Ensure winners are sorted by points
+              .sort((a, b) => b.points - a.points), 
           },
           {
             title: 'Kalathilakam',
@@ -235,7 +66,7 @@ function Index() {
                 college: scorer.topScorer.college,
                 points: scorer.topScorer.score,
               }))
-              .sort((a, b) => b.points - a.points), // Ensure winners are sorted by points
+              .sort((a, b) => b.points - a.points), 
           },
           {
             title: 'Sahithyaprathiba',
@@ -247,7 +78,7 @@ function Index() {
                 college: scorer.topScorer.college,
                 points: scorer.topScorer.score,
               }))
-              .sort((a, b) => b.points - a.points), // Ensure winners are sorted by points
+              .sort((a, b) => b.points - a.points), 
           },
           {
             title: 'Chithrapradhiba',
@@ -259,13 +90,12 @@ function Index() {
                 college: scorer.topScorer.college,
                 points: scorer.topScorer.score,
               }))
-              .sort((a, b) => b.points - a.points), // Ensure winners are sorted by points
+              .sort((a, b) => b.points - a.points), 
           },
         ];
 
         setIndividuals(formattedData);
         console.log(formattedData);
-        // Set individual all-rounders
         const topScorers = data.data.topScorers.map((scorer) => ({
           name: scorer.name,
           image: scorer.image,
@@ -292,24 +122,31 @@ function Index() {
 
         <div className="flex justify-center ">
           <button
-            className={`py-2 px-4 ${activeTab === 'college' ? 'bg-[#276692] border border-[#276692] text-white' : 'bg-white border border-black border-r-0'
+            className={`py-[5px] px-6 flex font-bold items-center gap-1 justify-center
+            ${activeTab === 'college' ? 'bg-[#276692] border border-[#276692] text-white' : 'bg-white border border-black border-r-0'
               }`}
             onClick={() => setActiveTab('college')}
           >
+            <CollegeIcon color={activeTab === 'college' ? 'white' : 'black'} />
             College
           </button>
           <button
-            className={`py-2 px-4 ${activeTab === 'individual' ? 'bg-[#276692] border border-[#276692] text-white' : 'bg-white border border-black border-l-0'
+            className={`py-[5px] px-6 flex items-center gap-1 justify-center font-bold
+            ${activeTab === 'individual' ? 'bg-[#276692] border border-[#276692] text-white' : 'bg-white border border-black border-l-0'
               }`}
             onClick={() => setActiveTab('individual')}
           >
+            <UserRound strokeWidth={3} size={18} color={activeTab !== 'college' ? 'white' : 'black'} />
             Individual
           </button>
         </div>
         {loading ? (
           <p className="text-center text-gray-500 mt-4">Loading...</p>
         ) : (
-          activeTab === 'college' ? <CollegeTab data={colleges} /> : <IndividualTab data={individuals} />
+          <div className=''>
+            {activeTab === 'college' ? <CollegeTab data={colleges} /> : <IndividualTab data={individuals} />}
+          </div>
+
         )}
 
       </section>
