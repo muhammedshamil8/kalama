@@ -1,15 +1,16 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import Header from '@/components/ui/Header';
-
-import { programs, getStageDetails } from '@/const/StageData';
+import { eventData } from '@/const/StageData';
 
 function Stage() {
-  const { id } = useParams();
-  const stagePrograms = programs[id] || programs[101];
-  const numericId = parseInt(id, 10);
-  const stageDetails = getStageDetails(numericId, '19-01-25');
-  console.log(stageDetails);
+  const { date, id } = useParams();
+  const stage = eventData[date]?.stages.find(stage => stage.id === parseInt(id));
+
+  if (!stage) {
+    return <p className="text-center mt-10 text-red-600">Stage not found.</p>;
+  }
+
   return (
     <div className="w-full">
       <Header title="Stage" href="/schedule" />
@@ -17,13 +18,13 @@ function Stage() {
       <section className='p-3 max-w-[500px] mx-auto mt-6'>
         <div className='border-black border p-2'>
 
-          <h1 className="text-center text-2xl font-bold mb-2 bg-black text-white p-4">{stageDetails.name || 'Stage Name'}</h1>
+          <h1 className="text-center text-2xl font-bold mb-2 bg-black text-white p-4">{stage.name || 'Stage Name'}</h1>
 
           <div className="max-w-[500px] mx-auto space-y-4 border border-black p-2">
-            {stagePrograms.length > 0 ? (
-              stagePrograms.map((program) => (
+          {stage.programs.length > 0 ? (
+            stage.programs.map((program, index) => (
                 <div
-                  key={program.id}
+                  key={index}
                   className="p-2  text-black border border-black  flex justify-between items-center"
                 >
                   <h2 className="text-lg font-bold max-w-[400px] ">{program.name}</h2>

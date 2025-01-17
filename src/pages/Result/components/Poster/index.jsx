@@ -63,8 +63,11 @@ function index() {
     return (
         <div className='relative max-w-[600px] overflow-hidden w-full h-[600px] mx-auto'>
             <img src={topElementOnstage} alt="topElement" className='absolute top-0 left-0 w-full max-w-[150px]' />
-            <img src={rightElementOnstage} alt="rightElement" className='absolute bottom-0 -right-10 z-10' />
+            <img src={rightElementOnstage} alt="rightElement" className='absolute bottom-0 -right-0 h-[800px] z-10' />
             <img src={bottomElementOnstage} alt="bottomElement" className='absolute bottom-0 left-0 right-0 ' />
+
+
+           
         </div>
     )
 }
