@@ -1,11 +1,13 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ArrowLeft } from 'lucide-react'
+import classNames from 'classnames';
 
 function index({
     className,
     title,
     href,
+    color = 'white',
     ...props
 }) {
     const navigate = useNavigate();
@@ -23,8 +25,20 @@ function index({
                     <div className='bg-white h-1 w-2 absolute -right-[7px] top-[35%]' />
                 </button>
             </div>
-            <div className='border-2 border-black text-[#231F20] px-8 font-semibold py-[2px]'>
-                <h1>{title}</h1>
+            <div className={classNames(' text-[#231F20] px-8 font-semibold py-[2px]',
+                {
+                    'bg-[#3592BA] border-2 border-[#3592BA]': color === '#3592BA',
+                    'bg-[#00A99D] border-2 border-[#00A99D]': color === '#00A99D',
+                    'bg-[#8DC63F] border-2 border-[#8DC63F]': color === '#8DC63F',
+                    'bg-black border-2 border-white': color === 'black',
+                    'bg-white border-2 border-black': color === 'white',
+                })}>
+                <h1 className={classNames(
+                    {
+                        'text-black': color === 'white',
+                        'text-white': color !== 'white',
+                    }
+                )}>{title}</h1>
             </div>
             <div />
         </div>
