@@ -5,7 +5,7 @@ import { useAutoAnimate } from '@formkit/auto-animate/react';
 function IndividualTab({ data }) {
     const [expandedCategories, setExpandedCategories] = useState({});
 
-    console.log(data)
+    // console.log(data)
 
     const toggleExpand = (index) => {
         setExpandedCategories((prev) => ({

@@ -40,7 +40,7 @@ function Index() {
       try {
         const response = await fetch(`${ApiUrl}/events/resultPublished`);
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
         setPrograms(data?.data);
       } catch (error) {
         console.error(error);
@@ -111,7 +111,7 @@ function Index() {
 
       setSelectedProgram(formattedData[0]);
       setIsDialogOpen(true);
-      console.log("Formatted Data:", formattedData[0]);
+      // console.log("Formatted Data:", formattedData[0]);
     } catch (error) {
       console.error('Failed to select program', error);
     } finally {
@@ -122,13 +122,13 @@ function Index() {
 
 
   const isNewRelease = (dateString) => {
-    console.log(dateString);
+    // console.log(dateString);
     const currentDate = new Date();
     const programDate = new Date(dateString);
 
     // Calculate the difference in hours
     const timeDifference = Math.abs(currentDate - programDate) / (1000 * 60 * 60);
-    console.log(timeDifference <= 80);
+    // console.log(timeDifference <= 80);
     return timeDifference <= 30;
   };
 
