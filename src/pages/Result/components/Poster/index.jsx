@@ -18,6 +18,9 @@ import {
     sponserLogo,
     topElement,
     topElementOnstage,
+    blur1,
+    blur2,
+    blur3
 } from "@/assets/poster/index.js";
 import classNames from 'classnames';
 
@@ -64,9 +67,9 @@ function index({ data }) {
             <img src={data.stageStatus === "off_stage" ? rightElement : rightElementOnstage} alt="rightElement" className='absolute bottom-0 right-0 z-10 max-w-[50px]' />
             <img src={data.stageStatus === "off_stage" ? bottomElement : bottomElementOnstage} alt="bottomElement" className='absolute bottom-0 left-0 right-0 w-full ' />
 
-            <div className="bg-yellow-400 absolute top-48 -left-2 right-0 bottom-0 w-10 h-10 blur-2xl rounded-full "></div>
-            <div className="bg-orange-400 absolute  left-2/4 right-0 bottom-0 w-10 h-10 blur-2xl rounded-full "></div>
-            <div className="bg-violet-500 absolute  -top-5 right-1/4 w-14 h-14 blur-2xl rounded-full "></div>
+            <img src={blur1} className=" absolute top-28 left-0 w-24  "/>
+            <img src={blur3} className="absolute  left-2/4 right-0 bottom-0 w-36"/>
+            <img src={blur2} className="absolute  top-0 right-1/4 w-36"/>
 
             <img className="w-20 pt-10" src={aikm} alt="" />
             <div className="pt-1 flex items-end">
@@ -79,11 +82,12 @@ function index({ data }) {
                     <span>{ResultNumber(data.result_no)}</span>
                 </div>
             </div>
-            <div className='bg-[#220440] text-white px-2  mt-3 max-w-[220px] text-[14px]'>
-                <span className={classNames('text-[14px] font-semibold ',
+            <div className='bg-[#220440] text-white px-2   mt-3 max-w-[220px] text-[14px]'>
+                <p className={classNames('text-[14px] font-semibold leading-tight py-[3px]',
                     {
-                        'text-[12px] ': data.programName.length > 20,
-                    })}>{data.programName}</span>
+                        'text-[8px] ': data.programName.length > 26,
+                    })}>{data.programName}</p>
+
             </div>
             <div className="mt-3 space-y-4">
                 {data.winners.map((winner, index) => (
