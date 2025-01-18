@@ -88,9 +88,9 @@ function Index() {
 
 
     return (
-        <div className="w-full">
-            <section className='w-full  mx-auto mt-10 px-4'>
-                <div className='flex justify-between items-center max-w-[2600px] mx-auto p-10'>
+        <div className="w-full min-h-[100dh]">
+            <section className='hidden 2xl:block w-full  mx-auto mt-10 px-4 '>
+                <div className='flex justify-between items-center w-full max-w-[2600px] mx-auto p-10'>
 
                     <div className='flex gap-1 items-center justify-center h-fit w-fit'>
                         <div>
@@ -123,10 +123,15 @@ function Index() {
                     </section>
                 </mian>
 
-            </section>
 
                 <img src={Avatar_bl} alt="Bottom Left Avatar" className="absolute bottom-0 left-0 w-full max-w-[600px]" />
                 <img src={Avatar_br} alt="Bottom Right Avatar" className="absolute bottom-0 right-0 w-full max-w-[600px]" />
+            </section>
+
+
+            <div className="flex items-center justify-center w-full min-h-screen px-4 py-2 bg-slate-100 font-semibold 2xl:hidden">
+                This Page is optimized for TV screens only.
+            </div>
 
         </div>
     );
