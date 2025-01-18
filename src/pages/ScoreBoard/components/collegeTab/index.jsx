@@ -3,15 +3,18 @@ import classNames from 'classnames';
 import { college } from '@/assets/icons';
 import { useState } from 'react';
 import { Share2 } from 'lucide-react';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
 
 
 
 
 function CollegeTab({ data }) {
 
-    const [searchTerm, setSearchTerm] = useState('');   
+    const [searchTerm, setSearchTerm] = useState('');  
 
-    console.log(data);
+    const [parent] = useAutoAnimate()
+
+    // console.log(data);
 
     const BgRank = ({ color }) => (
         <svg width="60" height="68" viewBox="0 0 47 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -105,6 +108,7 @@ function CollegeTab({ data }) {
                         className="ring-0 focus:ring-0 focus:outline-none w-full pl-2"
                     />
                 </div>
+                <div ref={parent}>
                 {filteredData.length > 0 ? filteredData.slice(0, 10).map((college, index) => {
                     return (
                         <div
@@ -140,6 +144,7 @@ function CollegeTab({ data }) {
                             <img src={Empty} alt="Empty" className="w-1/2" />
                         </div>
                     )}
+            </div>
             </div>
         </div >
     );
