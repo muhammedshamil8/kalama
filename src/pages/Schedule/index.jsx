@@ -1,21 +1,18 @@
 import React, { useState } from 'react';
 import Header from '@/components/ui/Header';
 import { useNavigate } from 'react-router-dom';
-
-import { stages, dates } from '@/const/StageData';
+import { eventData } from '@/const/StageData';
 
 function Schedule() {
   const navigate = useNavigate();
-
-
-  const [selectedDate, setSelectedDate] = useState(dates[0]);
+  const [selectedDate, setSelectedDate] = useState(Object.keys(eventData)[0]);
 
   const handleSelectStage = (id) => {
-    navigate(`/stage/${id}`);
-  }
+    navigate(`/stage/${selectedDate}/${id}`);
+  };
 
   function pickColor(rank) {
-    const colors = ['border-b-[5px] border-b-[#276692]', 'border-b-[5px] border-b-[#00A99D]', 'border-b-[5px] border-b-[#8DC63F]'];
+    const colors = ['border-b-[5px] border-b-[#3592BA]', 'border-b-[5px] border-b-[#00A99D]', 'border-b-[5px] border-b-[#8DC63F]'];
 
     return colors[(rank - 1) % colors.length];
   }
@@ -30,7 +27,7 @@ function Schedule() {
         {/* Date Navigation */}
         <div className='flex items-center justify-center px-3'>
           <div className="flex justify-start gap-4 mb-6 overflow-auto scroll-pl-6 snap-x scrollbar-hide  mx-auto">
-            {dates.map((date) => (
+            {Object.keys(eventData).map(date => (
               <button
                 key={date}
                 onClick={() => setSelectedDate(date)}
@@ -47,16 +44,17 @@ function Schedule() {
 
         {/* Stage Display */}
         <div className="space-y-4 max-w-[600px] mx-auto px-4">
-          {stages[selectedDate]?.map((stage, index) => (
-            <div className={`p-1  border-2 border-black max-w-[400px] mx-auto ${pickColor(index + 1)}`}
+          {eventData[selectedDate]?.stages.map((stage, index) => (
+            <div className={`p-1  border-2 border-black max-w-[400px] mx-auto relative`}
               key={stage.id}
             >
+              <div className={`w-full absolute -bottom-[7px] left-0 right-0 ${pickColor(index + 1)}`}></div>
               <div
                 onClick={() => handleSelectStage(stage.id)}
                 className={`p-2 text-center text-white cursor-pointer ${(index + 1) % 2 === 0 ? 'bg-[#605F5F]' : 'bg-black'
                   }`}
               >
-                <h2 className="text-md font-bold  pb-0 ">{stage.stage}</h2>
+                <h2 className="text-md font-bold  pb-0 ">{stage.name}</h2>
                 <p className="text-2xl font-black uppercase">{stage.name}</p>
               </div>
             </div>

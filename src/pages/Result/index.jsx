@@ -214,6 +214,8 @@ function Index() {
     });
   };
 
+  const colors = ['#3592BA', '#00A99D', '#8DC63F', '#FF5733', '#FFC300'];
+
 
   return (
     <div className='w-full p-4'>
@@ -244,6 +246,7 @@ function Index() {
                     <div
                       onClick={() => handleProgramSelect(program)}
                       key={index}
+                      style={{ backgroundColor: colors[index % colors.length] }} 
                       className='bg-[#605F5F] border-[2px] cursor-pointer border-b-[4px] border-black px-4 py-1 text-white font-semibold  rounded-none shadow-md flex items-center justify-center '
                     >
                       {program?.name}

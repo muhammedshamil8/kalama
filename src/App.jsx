@@ -22,7 +22,7 @@ const routes = [
         element: <Schedule />,
       },
       {
-        path: "stage/:id",
+        path: "stage/:date/:id",
         element: <Stage />,
       },
       {
