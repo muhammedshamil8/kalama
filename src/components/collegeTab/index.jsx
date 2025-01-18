@@ -3,12 +3,18 @@ import classNames from 'classnames';
 import { college } from '@/assets/icons';
 import { useState } from 'react';
 import { Share2 } from 'lucide-react';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
 
 
 
 
 function CollegeTab({ data }) {
-    console.log(data);
+
+    const [searchTerm, setSearchTerm] = useState('');  
+
+    const [parent] = useAutoAnimate()
+
+    // console.log(data);
 
     const BgRank = ({ color }) => (
         <svg width="60" height="68" viewBox="0 0 47 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -69,6 +75,15 @@ function CollegeTab({ data }) {
         }
     }
 
+    const rankedList = data.map((item, index) => ({
+        ...item,
+        rank: index + 1
+    }));
+
+    const filteredData = rankedList.filter((item) =>
+        item.collegeName.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
     return (
         <div className="">
             {/* <div className='flex items-start justify-end max-w-[275px] mx-auto'>
@@ -77,30 +92,45 @@ function CollegeTab({ data }) {
                     Share Now
                 </button>
             </div> */}
-            <div className='mt-10'>
-                {data.length > 0 ? data.map((college, index) => {
-                    const rank = index + 1;
+
+            {/* Search Box */}
+
+
+            <div className='mt-8'>
+
+                <div className="flex mb-4 items-center justify-center w-full p-2 border border-gray-800 shadow-sm max-w-[360px] mx-auto focus-within:border-blue-500 focus-within:shadow-md">
+                    {/* <img src={SearchIcon} alt="Search Icon" className="w-6 h-6" /> */}
+                    <input
+                        type="text"
+                        placeholder="Search College"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        className="ring-0 focus:ring-0 focus:outline-none w-full pl-2"
+                    />
+                </div>
+                <div ref={parent}>
+                {filteredData.length > 0 ? filteredData.slice(0, 10).map((college, index) => {
                     return (
                         <div
-                            key={rank}
-                            className={classNames(`flex justify-start gap-3 w-full flex-1 items-center p-4 pb-2 mb-4 border border-b-[4px]   max-w-[360px] mx-auto ${pickBorderColor(rank)}`)}
+                            key={index}
+                            className={classNames(`flex justify-start gap-3 w-full flex-1 items-center p-4 pb-2 mb-4 border border-b-[4px]   max-w-[360px] mx-auto ${pickBorderColor(college.rank)}`)}
                         >
                             <div className="flex items-center gap-4 flex-1 w-full min-h-[60px]">
                                 <div
                                     className="w-10 h-2 relative flex items-center justify-center font-bold text-white mr-4 pl-4"
                                 >
-                                    <span className="text-4xl z-10"> {rank}</span>
+                                    <span className="text-4xl z-10"> {college.rank}</span>
 
                                     <div className='-z-10 absolute'>
-                                        <BgRank color={pickColor(rank)} />
+                                        <BgRank color={pickColor(college.rank)} />
                                     </div>
                                 </div>
                                 <div className='flex-1 w-full flex flex-col gap-1 '>
                                     <p className="font-semibold leading-4">{college.collegeName} </p>
-                                    <hr className={`border-[1.5px] mb-[1px] ${pickBorderColor(rank)}`} />
+                                    <hr className={`border-[1.5px] mb-[1px] ${pickBorderColor(college.rank)}`} />
                                     <div className='flex items-end justify-end'>
                                         <span className={`flex items-center justify-center px-2 py-[1px]  text-white font-bold rounded-none  
-                                        ${pickBgColor(rank)}`}>
+                                        ${pickBgColor(college.rank)}`}>
                                             {college.totalScore} Pts
                                         </span>
                                     </div>
@@ -114,6 +144,7 @@ function CollegeTab({ data }) {
                             <img src={Empty} alt="Empty" className="w-1/2" />
                         </div>
                     )}
+            </div>
             </div>
         </div >
     );
