@@ -118,12 +118,12 @@ function Index() {
   return (
     <div className="w-full">
       <Header title="Score Board" href="/" />
-      <section className='w-full max-w-[700px] mx-auto mt-10'>
+      <section className='w-full max-w-[700px] mx-auto mt-10 px-4'>
 
-        <div className="flex justify-center ">
+        <div className="flex justify-center w-full max-w-[360px] mx-auto   sm:px-0">
           <button
-            className={`py-[5px] px-6 flex font-bold items-center gap-1 justify-center
-            ${activeTab === 'college' ? 'bg-[#276692] border border-[#276692] text-white' : 'bg-white border border-black border-r-0'
+            className={`py-[5px] px-6 flex font-bold items-center gap-1 justify-center w-full
+            ${activeTab === 'college' ? 'bg-customBlue border border-customBlue text-white' : 'bg-white border border-borderColor border-r-0'
               }`}
             onClick={() => setActiveTab('college')}
           >
@@ -131,8 +131,8 @@ function Index() {
             College
           </button>
           <button
-            className={`py-[5px] px-6 flex items-center gap-1 justify-center font-bold
-            ${activeTab === 'individual' ? 'bg-[#276692] border border-[#276692] text-white' : 'bg-white border border-black border-l-0'
+            className={`py-[5px] px-6 flex items-center gap-1 justify-center font-bold w-full
+            ${activeTab === 'individual' ? 'bg-customBlue border border-customBlue text-white' : 'bg-white border border-borderColor border-l-0'
               }`}
             onClick={() => setActiveTab('individual')}
           >

@@ -17,11 +17,12 @@ import {
     topElement,
     topElementOnstage
 } from '@/assets/poster/index.js';
+import classNames from 'classnames';
 
 function index() {
 
     const data = {
-        "programName": "Colorado Skinner",
+        "programName": "Colorado Skinner rounded-full flex items-center justify-center",
         "id": "67753efe5637c2b3ca921678",
         "result_no": 3,
         "stageStatus": "off_stage",
@@ -60,6 +61,8 @@ function index() {
         ]
     }
 
+    console.log(data.stageStatus)
+
 
     const getPosition = (position) => {
         switch (position) {
@@ -89,15 +92,18 @@ function index() {
 
     const totalParticipants = getTotalParticipants(data);
 
-
+    function ResultNumber(result_no) {
+        // '001'
+        return result_no.toString().padStart(3, '0');
+    }
 
     return (
-        <div className={`relative flex items-center flex-col w-[350px] mx-auto overflow-y-hidden`} style={{
+        <div className={`relative flex items-center flex-col w-[360px] mx-auto overflow-hidden pb-[40px] px-[40px]`} style={{
             height: `${300 + totalParticipants * 40}px`,
         }} >
-            <img src={topElementOnstage} alt="topElement" className='absolute top-0 left-0 w-full max-w-[70px]' />
-            <img src={rightElementOnstage} alt="rightElement" className='absolute bottom-0 -right-0 z-10 max-w-[50px]' />
-            <img src={bottomElementOnstage} alt="bottomElement" className='absolute bottom-0 left-0 right-0 w-full ' />
+            <img src={data.stageStatus === "off_stage" ? topElement : topElementOnstage} alt="topElement" className='absolute top-0 left-0 w-full max-w-[70px]' />
+            <img src={data.stageStatus === "off_stage" ? rightElement : rightElementOnstage} alt="rightElement" className='absolute bottom-0 -right-[1px] z-10 max-w-[50px]' />
+            <img src={data.stageStatus === "off_stage" ? bottomElement : bottomElementOnstage} alt="bottomElement" className='absolute -bottom-[2px] left-0 right-0 w-full ' />
 
             <div className='bg-yellow-400 absolute top-48 -left-2 right-0 bottom-0 w-10 h-10 blur-2xl rounded-full '></div>
             <div className='bg-orange-400 absolute  left-2/4 right-0 bottom-0 w-10 h-10 blur-2xl rounded-full '></div>
@@ -109,13 +115,16 @@ function index() {
                 <img src={KalamaLogo} alt="" className='w-8' />
             </div>
             <div className='flex items-end relative' >
-                <img src={resultTxtOnstage} alt="" className='w-24 pt-4' />
-                <div className='bg-orange-500 absolute right-0 h-4 w-4 rounded-full flex items-center justify-center text-white font-bold text-[6px]'>
-                    <span>001</span>
+                <img src={data.stageStatus === "off_stage" ? resultTxt : resultTxtOnstage} alt="" className='w-24 pt-4' />
+                <div className='bg-orange-500 absolute right-0 h-4 w-4 rounded-full flex items-center justify-center text-white font-bold text-[6px] !leading-[0px]'>
+                    <span>{ResultNumber(data.result_no)}</span>
                 </div>
             </div>
-            <div className='bg-[#220440] text-white px-2  mt-3'>
-                <span className='text-[14px] font-semibold'>{data.programName}</span>
+            <div className='bg-[#220440] text-white px-2  mt-3 max-w-[220px]'>
+                <span className={classNames('text-[14px] font-semibold ',
+                    {
+                        'text-[12px] ': data.programName.length > 20,
+                    })}>{data.programName}</span>
             </div>
             <div className='mt-3 space-y-4'>
                 {data.winners.map((winner, index) => (
@@ -136,7 +145,11 @@ function index() {
                     </div>
                 ))}
             </div>
-            <div className='flex justify-between w-full px-16 mt-10'>
+            <div className={classNames('flex justify-between w-full px-16 mt-8',
+            {
+                'text-[12px] -leading-[2px]': data.programName.length > 20,
+            }
+            )}>
                 <img src={CreatorLogo} alt="" className='w-8' />
                 <img src={sponserLogo} alt="" className='w-8' />
             </div>

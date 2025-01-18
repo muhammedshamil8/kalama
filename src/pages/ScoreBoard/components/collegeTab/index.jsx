@@ -35,11 +35,11 @@ function CollegeTab({ data }) {
 
     function pickBorderColor(rank) {
         if (rank === 1) {
-            return 'border-[#276692]'
+            return 'border-customBlue'
         } else if (rank === 2) {
-            return 'border-[#00A99D]'
+            return 'border-customEmerald'
         } else if (rank === 3) {
-            return 'border-[#8DC63F]'
+            return 'border-customGreen'
         } else {
             return 'border-[#000000]'
         }
@@ -47,11 +47,11 @@ function CollegeTab({ data }) {
 
     function pickBgColor(rank) {
         if (rank === 1) {
-            return 'bg-[#276692]'
+            return 'bg-customBlue'
         } else if (rank === 2) {
-            return 'bg-[#00A99D]'
+            return 'bg-customEmerald'
         } else if (rank === 3) {
-            return 'bg-[#8DC63F]'
+            return 'bg-customGreen'
         } else {
             return 'bg-[#000000]'
         }
@@ -70,24 +70,24 @@ function CollegeTab({ data }) {
     }
 
     return (
-        <div className="p-4 ">
-            <div className='flex items-start justify-end max-w-[275px] mx-auto'>
+        <div className="">
+            {/* <div className='flex items-start justify-end max-w-[275px] mx-auto'>
                 <button className="flex items-center gap-2 border border-gray-700 px-2 text-[13px] py-1">
                 <Share2 size={16} className='fill-black'/>
                     Share Now
                 </button>
-            </div>
+            </div> */}
             <div className='mt-10'>
                 {data.length > 0 ? data.map((college, index) => {
                     const rank = index + 1;
                     return (
                         <div
                             key={rank}
-                            className={classNames(`flex justify-around w-full flex-1 items-center p-4 mb-4 border border-b-[4px]  max-w-[380px] mx-auto ${pickBorderColor(rank)}`)}
+                            className={classNames(`flex justify-start gap-3 w-full flex-1 items-center p-4 pb-2 mb-4 border border-b-[4px]   max-w-[360px] mx-auto ${pickBorderColor(rank)}`)}
                         >
-                            <div className="flex items-center gap-2 ">
+                            <div className="flex items-center gap-4 flex-1 w-full min-h-[60px]">
                                 <div
-                                    className="w-14 h-2 relative flex items-center justify-center font-bold text-white mr-4"
+                                    className="w-10 h-2 relative flex items-center justify-center font-bold text-white mr-4 pl-4"
                                 >
                                     <span className="text-4xl z-10"> {rank}</span>
 
@@ -95,8 +95,8 @@ function CollegeTab({ data }) {
                                         <BgRank color={pickColor(rank)} />
                                     </div>
                                 </div>
-                                <div className='flex-1 w-full flex flex-col gap-1'>
-                                    <p className="font-semibold leading-4">{college.collegeName}</p>
+                                <div className='flex-1 w-full flex flex-col gap-1 '>
+                                    <p className="font-semibold leading-4">{college.collegeName} </p>
                                     <hr className={`border-[1.5px] mb-[1px] ${pickBorderColor(rank)}`} />
                                     <div className='flex items-end justify-end'>
                                         <span className={`flex items-center justify-center px-2 py-[1px]  text-white font-bold rounded-none  

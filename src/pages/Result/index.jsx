@@ -161,18 +161,22 @@ function Index() {
       action: "Click",
       label: "Download result",
     });
-    html2canvas(poster).then((canvas) => {
-      const imageUrl = canvas.toDataURL('image/png'); // Create image URL from canvas
-      setImageUrl(imageUrl);
-      const link = document.createElement('a'); // Create a temporary link element
-      link.href = imageUrl;
-      if (selectedProgram) {
-        link.download = `${selectedProgram.programName}-result.png`; // Set the download attribute to the program name
-      } else {
-        link.download = 'poster.png';
-      }
-      link.click();
-    });
+    html2canvas(poster,
+      {
+        scale: 10, // Increase the scale for higher resolution (default is 1)
+        useCORS: true
+      }).then((canvas) => {
+        const imageUrl = canvas.toDataURL('image/png'); // Create image URL from canvas
+        setImageUrl(imageUrl);
+        const link = document.createElement('a'); // Create a temporary link element
+        link.href = imageUrl;
+        if (selectedProgram) {
+          link.download = `${selectedProgram.programName}-result.png`; // Set the download attribute to the program name
+        } else {
+          link.download = 'poster.png';
+        }
+        link.click();
+      });
   };
 
 
@@ -184,34 +188,38 @@ function Index() {
       label: "Share now result",
     });
     // Capture the content of the element as a canvas
-    html2canvas(poster).then((canvas) => {
-      // Convert the canvas to a Blob
-      canvas.toBlob(async (blob) => {
-        if (!blob) return;
+    html2canvas(poster,
+      {
+        scale: 10, // Increase the scale for higher resolution (default is 1)
+        useCORS: true
+      }).then((canvas) => {
+        // Convert the canvas to a Blob
+        canvas.toBlob(async (blob) => {
+          if (!blob) return;
 
-        // Create a File object from the Blob
-        const file = new File([blob], 'poster.png', { type: 'image/png' });
+          // Create a File object from the Blob
+          const file = new File([blob], 'poster.png', { type: 'image/png' });
 
-        // Check if the Web Share API supports file sharing
-        if (navigator.share) {
-          try {
-            // Share the image as a file
-            await navigator.share({
-              title: "Artify",
-              url: 'https://artify.connectemea.in',
-              text: "Check out the winners! 🎉",
-              files: [file], // Pass the image file
-            });
-            // console.log('Shared successfully!');
-          } catch (err) {
-            console.error('Error sharing:', err);
+          // Check if the Web Share API supports file sharing
+          if (navigator.share) {
+            try {
+              // Share the image as a file
+              await navigator.share({
+                title: "Artify",
+                url: 'https://czonekalama.in',
+                text: "Check out the winners! 🎉",
+                files: [file], // Pass the image file
+              });
+              // console.log('Shared successfully!');
+            } catch (err) {
+              console.error('Error sharing:', err);
+            }
+          } else {
+            console.warn('Web Share API not supported or file sharing not supported');
+            alert('Sorry, file sharing is not supported on your device please download the image and share it manually');
           }
-        } else {
-          console.warn('Web Share API not supported or file sharing not supported');
-          alert('Sorry, file sharing is not supported on your device please download the image and share it manually');
-        }
+        });
       });
-    });
   };
 
   const colors = ['#3592BA', '#00A99D', '#8DC63F', '#FF5733', '#FFC300'];
@@ -246,8 +254,8 @@ function Index() {
                     <div
                       onClick={() => handleProgramSelect(program)}
                       key={index}
-                      style={{ backgroundColor: colors[index % colors.length] }} 
-                      className='bg-[#605F5F] border-[2px] cursor-pointer border-b-[4px] border-black px-4 py-1 text-white font-semibold  rounded-none shadow-md flex items-center justify-center '
+                      style={{ backgroundColor: colors[index % colors.length] }}
+                      className='bg-[#605F5F] border-[2px] cursor-pointer border-b-[4px] border-borderColor px-4 py-1 text-white font-semibold  rounded-none shadow-md flex items-center justify-center leading-5'
                     >
                       {program?.name}
                     </div>
@@ -270,23 +278,23 @@ function Index() {
           <DialogHeader>
             <DialogTitle></DialogTitle>
             <DialogDescription></DialogDescription>
-            <div className='pb-10'>
+            <div className='pb-4'>
               <div className='min-h-[400px]'>
                 {loadingPoster ? (
                   <div className='flex items-center justify-center py-4'>
                     <Loader className='animate-spin' />
                   </div>
                 ) : (
-                  <div className='flex items-center justify-center pt-8'>
-                  <div className='w-fit h-fit' id='resultPosterId'>
-                    <Poster />
-                  </div>
+                  <div className='flex items-center justify-center pt-6'>
+                    <div className='w-fit h-fit' id='resultPosterId'>
+                      <Poster />
+                    </div>
                   </div>
                 )}
 
-                <div className='flex items-center justify-center gap-1 mt-3'>
-                  <button onClick={handleShare} className='flex items-center gap-1 border-2 border-black px-2 py-1 hover:bg-black hover:text-white transition-all ease-in-out duration-300' ><Share2 className='w-4 h-4' /><p className='font-semibold'>Share</p></button>
-                  <button onClick={handleDownload} className='flex items-center gap-1 border-2 border-black px-2 py-1 hover:bg-black hover:text-white transition-all ease-in-out duration-300' > <Download className='w-4 h-4' /><p className='font-semibold'>Download</p></button>
+                <div className='flex items-center justify-center gap-2 mt-4 max-w-[300px] mx-auto'>
+                  <button onClick={handleShare} className='flex flex-1 text-center justify-center items-center gap-1 border-2 border-borderColor px-2 py-1 hover:bg-black hover:text-white transition-all ease-in-out duration-300' ><Share2 className='w-4 h-4' /><p className='font-semibold'>Share</p></button>
+                  <button onClick={handleDownload} className='flex flex-1 text-center justify-center items-center gap-1 border-2 border-borderColor px-2 py-1 hover:bg-black hover:text-white transition-all ease-in-out duration-300' > <Download className='w-4 h-4' /><p className='font-semibold'>Download</p></button>
                 </div>
               </div>
 
@@ -296,7 +304,7 @@ function Index() {
       </Dialog>
 
 
-      <Poster />
+      {/* <Poster /> */}
     </div >
   );
 }

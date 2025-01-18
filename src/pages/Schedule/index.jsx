@@ -12,7 +12,7 @@ function Schedule() {
   };
 
   function pickColor(rank) {
-    const colors = ['border-b-[5px] border-b-[#3592BA]', 'border-b-[5px] border-b-[#00A99D]', 'border-b-[5px] border-b-[#8DC63F]'];
+    const colors = ['border-b-[5px] border-b-[#3592BA]', 'border-b-[5px] border-b-customEmerald', 'border-b-[5px] border-b-customGreen'];
 
     return colors[(rank - 1) % colors.length];
   }
@@ -31,8 +31,8 @@ function Schedule() {
               <button
                 key={date}
                 onClick={() => setSelectedDate(date)}
-                className={`px-3 snap-start py-[5px]  whitespace-nowrap border-2 border-black hover:bg-[#276692]/90 hover:border-[#276692] hover:text-white transition-all ease-in-out ${selectedDate === date
-                  ? 'bg-[#276692] text-white font-bold border !border-[#276692]'
+                className={`px-3 snap-start py-[5px]  whitespace-nowrap border-2 border-borderColor hover:bg-customBlue/90 hover:border-customBlue hover:text-white transition-all ease-in-out ${selectedDate === date
+                  ? 'bg-customBlue text-white font-bold border !border-customBlue'
                   : 'bg-white '
                   }`}
               >
@@ -45,10 +45,10 @@ function Schedule() {
         {/* Stage Display */}
         <div className="space-y-4 max-w-[600px] mx-auto px-4">
           {eventData[selectedDate]?.stages.map((stage, index) => (
-            <div className={`p-1  border-2 border-black max-w-[400px] mx-auto relative`}
+            <div className={`max-w-[400px]  mx-auto ${pickColor(index + 1)}`}>
+            <div className={`p-1  border-2 border-borderColor w-full  relative `}
               key={stage.id}
             >
-              <div className={`w-full absolute -bottom-[7px] left-0 right-0 ${pickColor(index + 1)}`}></div>
               <div
                 onClick={() => handleSelectStage(stage.id)}
                 className={`p-2 text-center text-white cursor-pointer ${(index + 1) % 2 === 0 ? 'bg-[#605F5F]' : 'bg-black'
@@ -57,6 +57,7 @@ function Schedule() {
                 <h2 className="text-md font-bold  pb-0 ">{stage.name}</h2>
                 <p className="text-2xl font-black uppercase">{stage.name}</p>
               </div>
+            </div>
             </div>
           ))}
         </div>
