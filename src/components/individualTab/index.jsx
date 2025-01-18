@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 function IndividualTab({ data }) {
     const [expandedCategories, setExpandedCategories] = useState({});
-
+    console.log(data);
     // Toggle expand/collapse for a specific category
     const toggleExpand = (index) => {
         setExpandedCategories((prev) => ({

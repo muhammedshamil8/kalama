@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Header from '@/components/ui/Header';
-import CollegeTab from './components/collegeTab';
-import IndividualTab from './components/individualTab';
+import CollegeTab from '@/components/collegeTab';
+import IndividualTab from '@/components/individualTab';
 import { UserRound } from 'lucide-react';
 
 
@@ -36,7 +36,7 @@ function Index() {
         const data = await response.json();
 
         // Log the raw data for debugging
-        console.log(data);
+        // console.log(data);
 
         // Sort colleges by their total score
         const sortedColleges = data.data.results.sort((a, b) => b.totalScore - a.totalScore);
@@ -85,10 +85,10 @@ function Index() {
             winners: data.data.categoryTopScorers
               .filter((scorer) => scorer.category === 'chithrolsavam')
               .map((scorer) => ({
-                name: scorer.topScorer.name,
-                image: scorer.topScorer.image,
-                college: scorer.topScorer.college,
-                points: scorer.topScorer.score,
+                name: scorer.name,
+                image: scorer.image,
+                college: scorer.college,
+                points: scorer.score,
               }))
               .sort((a, b) => b.points - a.points), 
           },
@@ -96,13 +96,14 @@ function Index() {
 
         setIndividuals(formattedData);
         console.log(formattedData);
-        const topScorers = data.data.topScorers.map((scorer) => ({
-          name: scorer.name,
-          image: scorer.image,
-          college: scorer.college,
-          points: scorer.total_score,
-        })).sort((a, b) => b.points - a.points);
-        setIndividualAllRounder(topScorers);
+
+        // const topScorers = data.data.topScorers.map((scorer) => ({
+        //   name: scorer.name,
+        //   image: scorer.image,
+        //   college: scorer.college,
+        //   points: scorer.total_score,
+        // })).sort((a, b) => b.points - a.points);
+        // setIndividualAllRounder(topScorers);
 
       } catch (error) {
         console.error('Error fetching leaderboard data:', error);

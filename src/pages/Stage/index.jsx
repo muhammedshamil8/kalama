@@ -21,9 +21,10 @@ function Stage() {
 
       <section className='p-3 max-w-[500px] mx-auto mt-6'>
         <div className='border-borderColor border p-2'>
-
-          <h1 className="text-center text-2xl font-bold mb-2 bg-black text-white p-4">{stage.name || 'Stage Name'}</h1>
-
+          <div className="text-center font-bold mb-1 bg-black text-white p-4">
+            <h1 className='text-2xl mb-1'>{stage.name || 'Stage Name'}</h1>
+            <h1 className="text-md">{stage.location || 'location'}</h1>
+          </div>
           <div className="max-w-[500px] mx-auto space-y-4 border border-borderColor p-2">
             {stage.programs.length > 0 ? (
               stage.programs.map((program, index) => (
