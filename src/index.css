@@ -16,3 +16,9 @@
     --radius: 0.5rem;
   }
 }
+
+@layer base {
+  img {
+    @apply inline-block;
+  }
+}

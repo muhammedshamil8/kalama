@@ -25,6 +25,8 @@ function Index() {
   const [loading, setLoading] = useState(true);
   const [loadingPoster, setLoadingPoster] = useState(true);
 
+  const [imageUrl, setImageUrl] = useState('');
+
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -261,7 +263,7 @@ function Index() {
       </section>
 
       <Dialog open={isDialogOpen} onOpenChange={handleOpenChange}>
-        <DialogContent className="max-h-[90vh] min-h-fit overflow-y-auto">
+        <DialogContent className="max-h-[90vh] min-h-fit overflow-y-auto p-0">
           <DialogHeader>
             <DialogTitle></DialogTitle>
             <DialogDescription></DialogDescription>
@@ -272,51 +274,16 @@ function Index() {
                     <Loader className='animate-spin' />
                   </div>
                 ) : (
-                  <div id="resultPosterId" className="w-full h-full bg-gradient-to-r from-blue-500 to-teal-400 border border-black  p-8">
-                    {/* Program Title */}
-                    <h1 className="font-bold text-3xl text-center text-white mb-4">{selectedProgram?.programName}</h1>
-
-                    {/* Displaying the program result number */}
-                    <div className="flex justify-center my-2">
-                      <span className="bg-teal-500 text-white py-2 px-4 rounded-full text-lg">{`Result #${selectedProgram.result_no}`}</span>
-                    </div>
-                    {/* Displaying the winner's details dynamically */}
-                    <div className="flex flex-col items-center bg-white p-4 rounded-lg shadow-xl">
-                      <h2 className="text-xl font-semibold text-gray-800 mb-4">Winners</h2>
-
-                      {/* Map through the winners array */}
-                      {selectedProgram.winners.map((winner, index) => (
-                        <div key={index} className="mb-6">
-                          <div className="text-lg font-bold text-blue-700 mb-2">{`Winner #${winner.position}: ${winner.participants[0].name}`}</div>
-                          <div className="text-md text-gray-600">{winner.participants[0].department}</div>
-                          <div className="text-sm text-gray-500">{`Year: ${winner.participants[0].year}`}</div>
-                        </div>
-                      ))}
-                    </div>
-
-
-                    {/* Displaying the stage status */}
-                    <div className="mt-4 text-center">
-                      <span className={`py-2 px-4 rounded-full text-white font-bold ${selectedProgram.stageStatus === "on_stage" ? "bg-green-500" : "bg-gray-500"}`}>
-                        {selectedProgram.stageStatus === "on_stage" ? "On Stage" : "Off Stage"}
-                      </span>
-                    </div>
+                  <div className='flex items-center justify-center pt-8'>
+                  <div className='w-fit h-fit' id='resultPosterId'>
+                    <Poster />
+                  </div>
                   </div>
                 )}
 
-                <div className='grid grid-cols-3  border border-black  bg-white'>
-
-                  <div className='col-span-2 flex  items-center justify-center gap-3 bg-[#276692] relative '>
-                    <button className='flex ring-0 focus:ring-0 focus:outline-none  items-center justify-center gap-3 text-white transition-all ease-in-out duration-300' onClick={() => handleShare()}>
-                      <span ><Share2 /></span><p className='font-semibold'>Share Now</p>
-                    </button>
-
-                  </div>
-                  <div className='flex items-center justify-center border-l border-black relative py-2'>
-                    <span onClick={handleDownload} className='cursor-pointer hover:text-[#ff1493] transition-all ease-in-out duration-300'>
-                      <Download className='stroke-2' />
-                    </span>
-                  </div>
+                <div className='flex items-center justify-center gap-1 mt-3'>
+                  <button onClick={handleShare} className='flex items-center gap-1 border-2 border-black px-2 py-1 hover:bg-black hover:text-white transition-all ease-in-out duration-300' ><Share2 className='w-4 h-4' /><p className='font-semibold'>Share</p></button>
+                  <button onClick={handleDownload} className='flex items-center gap-1 border-2 border-black px-2 py-1 hover:bg-black hover:text-white transition-all ease-in-out duration-300' > <Download className='w-4 h-4' /><p className='font-semibold'>Download</p></button>
                 </div>
               </div>
 
