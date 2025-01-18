@@ -5,5 +5,6 @@ import Kalaama from './kalaama.svg';
 import Kaloolsavm from './kaloolsavm.svg';
 import our_logo from './our_logo.svg';
 import date from './date.svg';
+import Empty from './gighy.gif';
 
-export { Aikiam, Coming_Soon, Kalaama, Kaloolsavm, our_logo, Coming_Soon_lap, date };
+export { Aikiam, Coming_Soon, Kalaama, Kaloolsavm, our_logo, Coming_Soon_lap, date ,Empty};
