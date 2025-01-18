@@ -161,6 +161,7 @@ function Index() {
       action: "Click",
       label: "Download result",
     });
+<<<<<<< HEAD
     html2canvas(poster,
       {
         scale: 10, // Increase the scale for higher resolution (default is 1)
@@ -177,6 +178,20 @@ function Index() {
         }
         link.click();
       });
+=======
+    html2canvas(poster, {scale: 3}).then((canvas) => {
+      const imageUrl = canvas.toDataURL('image/png'); // Create image URL from canvas
+      setImageUrl(imageUrl);
+      const link = document.createElement('a'); // Create a temporary link element
+      link.href = imageUrl;
+      if (selectedProgram) {
+        link.download = `${selectedProgram.programName}-result.png`; // Set the download attribute to the program name
+      } else {
+        link.download = 'poster.png';
+      }
+      link.click();
+    });
+>>>>>>> 525a52fa31273f0ce8e547fb890f389c86b272e9
   };
 
 
@@ -188,6 +203,7 @@ function Index() {
       label: "Share now result",
     });
     // Capture the content of the element as a canvas
+<<<<<<< HEAD
     html2canvas(poster,
       {
         scale: 10, // Increase the scale for higher resolution (default is 1)
@@ -196,6 +212,12 @@ function Index() {
         // Convert the canvas to a Blob
         canvas.toBlob(async (blob) => {
           if (!blob) return;
+=======
+    html2canvas(poster, {scale: 3}).then((canvas) => {
+      // Convert the canvas to a Blob
+      canvas.toBlob(async (blob) => {
+        if (!blob) return;
+>>>>>>> 525a52fa31273f0ce8e547fb890f389c86b272e9
 
           // Create a File object from the Blob
           const file = new File([blob], 'poster.png', { type: 'image/png' });
@@ -251,14 +273,14 @@ function Index() {
               <>
                 {filteredPrograms.length > 0 ? (
                   filteredPrograms.map((program, index) => (
-                    <div
+                    <button
                       onClick={() => handleProgramSelect(program)}
                       key={index}
                       style={{ backgroundColor: colors[index % colors.length] }}
                       className='bg-[#605F5F] border-[2px] cursor-pointer border-b-[4px] border-borderColor px-4 py-1 text-white font-semibold  rounded-none shadow-md flex items-center justify-center leading-5'
                     >
                       {program?.name}
-                    </div>
+                    </button>
                   ))
                 ) : (
                   <p className='text-gray-500'>No programs found.</p>
@@ -274,7 +296,7 @@ function Index() {
       </section>
 
       <Dialog open={isDialogOpen} onOpenChange={handleOpenChange}>
-        <DialogContent className="max-h-[90vh] min-h-fit overflow-y-auto p-0">
+        <DialogContent className="max-h-[90vh] min-h-fit overflow-y-auto p-0 scale-100 lg:scale-125">
           <DialogHeader>
             <DialogTitle></DialogTitle>
             <DialogDescription></DialogDescription>

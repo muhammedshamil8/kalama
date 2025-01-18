@@ -60,8 +60,8 @@ function Index() {
         <motion.div initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3, ease: "easeOut", delay: 1.3 }} className="flex justify-center  gap-4 w-full">
-          <HomeBtn label="Result" onClick={() => navigate("Result")} />
-          <HomeBtn label="Schedule" onClick={() => navigate("Schedule")} />
+          <HomeBtn label="Result" onClick={() => navigate("result")} />
+          <HomeBtn label="Schedule" onClick={() => navigate("schedule")} />
         </motion.div>
       </div>
     </div>
