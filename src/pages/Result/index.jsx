@@ -146,7 +146,7 @@ function Index() {
     // Calculate the difference in hours
     const timeDifference = Math.abs(currentDate - programDate) / (1000 * 60 * 60);
 
-    return timeDifference <= 30; // Returns true if within 24 hours
+    return timeDifference <= 30; 
   };
 
   const handleOpenChange = () => {
@@ -287,7 +287,7 @@ function Index() {
                 ) : (
                   <div className='flex items-center justify-center pt-6'>
                     <div className='w-fit h-fit' id='resultPosterId'>
-                      <Poster />
+                      <Poster data={selectedProgram}/>
                     </div>
                   </div>
                 )}
