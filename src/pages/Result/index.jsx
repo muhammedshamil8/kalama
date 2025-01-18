@@ -161,7 +161,7 @@ function Index() {
       action: "Click",
       label: "Download result",
     });
-    html2canvas(poster).then((canvas) => {
+    html2canvas(poster, {scale: 3}).then((canvas) => {
       const imageUrl = canvas.toDataURL('image/png'); // Create image URL from canvas
       setImageUrl(imageUrl);
       const link = document.createElement('a'); // Create a temporary link element
@@ -184,7 +184,7 @@ function Index() {
       label: "Share now result",
     });
     // Capture the content of the element as a canvas
-    html2canvas(poster).then((canvas) => {
+    html2canvas(poster, {scale: 3}).then((canvas) => {
       // Convert the canvas to a Blob
       canvas.toBlob(async (blob) => {
         if (!blob) return;
@@ -243,14 +243,14 @@ function Index() {
               <>
                 {filteredPrograms.length > 0 ? (
                   filteredPrograms.map((program, index) => (
-                    <div
+                    <button
                       onClick={() => handleProgramSelect(program)}
                       key={index}
                       style={{ backgroundColor: colors[index % colors.length] }} 
-                      className='bg-[#605F5F] border-[2px] cursor-pointer border-b-[4px] border-black px-4 py-1 text-white font-semibold  rounded-none shadow-md flex items-center justify-center '
+                      className='bg-[#605F5F] border-[2px]  border-b-[4px] hover:border-b-[2px] border-black px-4 py-1 text-white font-semibold  rounded-none shadow-md flex items-center justify-center '
                     >
                       {program?.name}
-                    </div>
+                    </button>
                   ))
                 ) : (
                   <p className='text-gray-500'>No programs found.</p>
@@ -266,7 +266,7 @@ function Index() {
       </section>
 
       <Dialog open={isDialogOpen} onOpenChange={handleOpenChange}>
-        <DialogContent className="max-h-[90vh] min-h-fit overflow-y-auto p-0">
+        <DialogContent className="max-h-[90vh] min-h-fit overflow-y-auto p-0 scale-100 lg:scale-125">
           <DialogHeader>
             <DialogTitle></DialogTitle>
             <DialogDescription></DialogDescription>
@@ -279,11 +279,10 @@ function Index() {
                 ) : (
                   <div className='flex items-center justify-center pt-8'>
                   <div className='w-fit h-fit' id='resultPosterId'>
-                    <Poster />
+                    <Poster data={selectedProgram} />
                   </div>
                   </div>
                 )}
-
                 <div className='flex items-center justify-center gap-1 mt-3'>
                   <button onClick={handleShare} className='flex items-center gap-1 border-2 border-black px-2 py-1 hover:bg-black hover:text-white transition-all ease-in-out duration-300' ><Share2 className='w-4 h-4' /><p className='font-semibold'>Share</p></button>
                   <button onClick={handleDownload} className='flex items-center gap-1 border-2 border-black px-2 py-1 hover:bg-black hover:text-white transition-all ease-in-out duration-300' > <Download className='w-4 h-4' /><p className='font-semibold'>Download</p></button>
@@ -296,7 +295,7 @@ function Index() {
       </Dialog>
 
 
-      <Poster />
+      {/* <Poster /> */}
     </div >
   );
 }
