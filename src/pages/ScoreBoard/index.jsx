@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Header from '@/components/ui/Header';
-import CollegeTab from '@/components/collegeTab';
-import IndividualTab from '@/components/individualTab';
+import CollegeTab from './components/collegeTab';
+import IndividualTab from './components/individualTab';
 import { UserRound } from 'lucide-react';
 
 
@@ -57,7 +57,7 @@ function Index() {
                 college: scorer.college,
                 points: scorer.score,
               }))
-              .sort((a, b) => b.points - a.points), 
+              .sort((a, b) => b.points - a.points),
           },
           {
             title: 'Kalathilakam',
@@ -69,7 +69,7 @@ function Index() {
                 college: scorer.college,
                 points: scorer.score,
               }))
-              .sort((a, b) => b.points - a.points), 
+              .sort((a, b) => b.points - a.points),
           },
           {
             title: 'Sahithyaprathiba',
@@ -81,7 +81,7 @@ function Index() {
                 college: scorer.college,
                 points: scorer.score,
               }))
-              .sort((a, b) => b.points - a.points), 
+              .sort((a, b) => b.points - a.points),
           },
           {
             title: 'Chithrapradhiba',
@@ -93,14 +93,14 @@ function Index() {
                 college: scorer.college,
                 points: scorer.score,
               }))
-              .sort((a, b) => b.points - a.points), 
+              .sort((a, b) => b.points - a.points),
           },
         ];
 
         setIndividuals(formattedData);
 
 
-        console.log(formattedData);
+        // console.log(formattedData);
 
 
         const topScorers = data.data.topScorers.map((scorer) => ({

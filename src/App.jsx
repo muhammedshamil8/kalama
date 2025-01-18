@@ -29,11 +29,11 @@ const routes = [
         path: "scoreboard",
         element: <ScoreBoard />,
       },
-      {
-        path: "tvscreen",
-        element: <TVscreen />,
-      }
     ],
+  },
+  {
+    path: "tvscreen",
+    element: <TVscreen />,
   },
   {
     path: "*",
