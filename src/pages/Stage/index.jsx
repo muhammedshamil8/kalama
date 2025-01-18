@@ -21,7 +21,7 @@ function Stage() {
 
       <section className='p-3 max-w-[500px] mx-auto mt-6'>
         <div className='border-borderColor border p-2'>
-          <div className="text-center font-bold mb-1 bg-black text-white p-4">
+          <div className={`text-center font-bold mb-1  ${(id) % 2 === 0 ? 'bg-[#605F5F]' : 'bg-black'} text-white p-4`}>
             <h1 className='text-2xl mb-1'>{stage.name || 'Stage Name'}</h1>
             <h1 className="text-md">{stage.location || 'location'}</h1>
           </div>
