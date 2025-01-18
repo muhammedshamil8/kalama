@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,4 +8,18 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Space Grotesk", serif;
 }
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  img {
+    @apply inline-block;
+  }
+}
+
