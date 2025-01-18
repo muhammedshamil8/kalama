@@ -38,6 +38,8 @@ function Schedule() {
     } else {
       // Reset when no search term
       setFilteredStages([]);
+      document.getElementById('search').value = "";
+      setSelectedDate(Object.keys(eventData)[0]);
     }
   }, [searchTerm]);
 
@@ -45,6 +47,8 @@ function Schedule() {
   const handleSearchChange = (e) => {
     if (e.target.value === "") {
       setSelectedDate(Object.keys(eventData)[0]);
+      document.getElementById('search').value = "";
+      // document.getElementById('search').innerHTML = "";
     } else {
       setSelectedDate("");
       setSearchTerm(e.target.value);
@@ -74,6 +78,7 @@ function Schedule() {
 
   const handleDateSelect = (date) => {
     setSearchTerm("");
+    document.getElementById('search').value = "";
     setSelectedDate(date);
   }
 
@@ -115,7 +120,8 @@ function Schedule() {
           <div className="flex items-center justify-center w-full p-2 border border-gray-800 shadow-sm max-w-[400px] mx-auto focus-within:border-blue-500 focus-within:shadow-md">
             <img src={SearchIcon} alt="Search Icon" className="w-6 h-6" />
             <input
-              type="text"
+              type="search"
+              id="search"
               placeholder="Search programs..."
               value={searchTerm}
               onChange={handleSearchChange}
