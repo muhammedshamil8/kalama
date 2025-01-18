@@ -5,10 +5,10 @@ import { Outlet, useOutletContext } from "react-router-dom";
 
 const Layout = () => {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-[100dvh] flex flex-col">
 
       {/* Main Content */}
-      <main className="flex w-full mx-auto flex-grow h-full min-h-[calc(100vh-200px)] flex-1">
+      <main className="flex w-full mx-auto flex-grow h-full min-h-[calc(100dvh-200px)] flex-1">
         <Outlet />
       </main>
 

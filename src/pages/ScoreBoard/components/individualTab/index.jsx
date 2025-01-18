@@ -52,14 +52,14 @@ function IndividualTab({ data }) {
                                 ))}
 
                                 {/* Show More Button */}
-                                {/* {otherWinners.length > 0 && (
+                                {otherWinners.length > 0 && (
                                     <button
                                         onClick={() => toggleExpand(index)}
                                         className="block mx-auto px-4 py-2 bg-customEmerald text-white font-bold rounded mt-2"
                                     >
                                         {isExpanded ? 'Show Less' : `Show More (${otherWinners.length} more)`}
                                     </button>
-                                )} */}
+                                )}
                             </>
                         )}
                     </div>

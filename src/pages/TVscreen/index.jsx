@@ -88,7 +88,7 @@ function Index() {
 
 
     return (
-        <div className="w-full min-h-[100dh]">
+        <div className="w-full min-h-[100dvh]">
             <section className='hidden 2xl:block w-full  mx-auto mt-10 px-4 '>
                 <div className='flex justify-between items-center w-full max-w-[2600px] mx-auto p-10'>
 
@@ -105,8 +105,8 @@ function Index() {
                         <img src={Logo_GloryBoard} alt="Product Logo" className="mx-auto max-w-[180px]" />
                     </div>
                 </div>
-                <mian className="flex justify-between items-center w-full mt-10">
-                    <section className='w-full max-w-[900px] mt-10 px-4'>
+                <mian className="flex justify-between items-center w-full mt-10 mx-auto">
+                    <section className=' w-[30%] mt-10 px-4 flex-1  flex-grow'>
                         <div className="flex justify-center w-full  mx-auto   sm:px-0">
                             <CollegeTab data={colleges} />
                         </div>
@@ -116,7 +116,7 @@ function Index() {
                             <PosterTab />
                         </div>
                     </section>
-                    <section className='w-full max-w-[900px] mt-10 px-4'>
+                    <section className='w-[30%]  mt-10 px-4 flex-1 flex-gorw'>
                         <div className="flex justify-center w-full  mx-auto   sm:px-0">
                             <IndividualTab data={individuals} />
                         </div>

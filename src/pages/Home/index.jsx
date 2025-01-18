@@ -7,7 +7,8 @@ import { motion } from "motion/react";
 function Index() {
   const navigate = useNavigate();
   return (
-    <div className="flex flex-col justify-around gap-10 min-h-[calc(100vh-100px)] py-10 mx-auto  w-full overflow-x-hidden overflow-y-auto">
+
+    <div className="flex flex-col justify-around gap-10 min-h-[calc(100dvh-100px)] py-10 mx-auto  w-full overflow-x-hidden overflow-y-auto">
       {/* Logo Aikiam */}
       <motion.div initial={{ opacity: 0, x: '50vw', scale: 1.5 }} // Start off-screen to the right, and slightly scaled up
         animate={{ opacity: 1, x: 0, scale: 1 }} // Animate to normal position and size
