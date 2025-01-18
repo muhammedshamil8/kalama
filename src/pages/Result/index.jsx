@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Header from '@/components/ui/Header';
 import { SearchIcon } from '@/assets/icons';
 
+
 import {
   Dialog,
   DialogContent,
@@ -13,7 +14,13 @@ import {
 import { Share2, Download, Loader } from 'lucide-react'
 import html2canvas from 'html2canvas';
 import ReactGA from "react-ga4";
-import Poster from './components/Poster';
+import Poster from '@/components/Poster';
+import Empty from '@/assets/gifs/empty.gif';
+import Loading from '@/assets/gifs/loading_hand.gif';
+
+import { motion } from "motion/react";
+import { useAutoAnimate } from '@formkit/auto-animate/react';
+
 
 function Index() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -23,10 +30,10 @@ function Index() {
   const [programs, setPrograms] = useState([]);
   const [filteredPrograms, setFilteredPrograms] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [loadingPoster, setLoadingPoster] = useState(true);
-
+  // const [loadingPoster, setLoadingPoster] = useState(true);
+  const [parent] = useAutoAnimate()
   const [imageUrl, setImageUrl] = useState('');
-
+  const [posterLoading, setPosterLoading] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -56,7 +63,7 @@ function Index() {
 
   const handleProgramSelect = async (program) => {
     setSelectedProgram(program);
-    setLoadingPoster(true);
+    setPosterLoading(true);
 
     try {
       const response = await fetch(`${ApiUrl}/result/event/${program._id}`, {
@@ -108,19 +115,20 @@ function Index() {
     } catch (error) {
       console.error('Failed to select program', error);
     } finally {
-      setLoadingPoster(false);
+      setPosterLoading(false);
     }
   };
 
 
 
   const isNewRelease = (dateString) => {
+    console.log(dateString);
     const currentDate = new Date();
     const programDate = new Date(dateString);
 
     // Calculate the difference in hours
     const timeDifference = Math.abs(currentDate - programDate) / (1000 * 60 * 60);
-
+    console.log(timeDifference <= 80);
     return timeDifference <= 30;
   };
 
@@ -219,33 +227,65 @@ function Index() {
         </div>
 
         {/* Program List */}
-        <div className='mt-10 w-full mx-auto'>
-          <div className='flex flex-wrap gap-4 items-center justify-center w-full mx-auto'>
-            {!loading ? (
-              <>
-                {filteredPrograms.length > 0 ? (
-                  filteredPrograms.map((program, index) => (
-                    <button
-                      onClick={() => handleProgramSelect(program)}
-                      key={index}
-                      style={{ backgroundColor: colors[index % colors.length] }}
-                      className='bg-[#605F5F] border-[1.6px] cursor-pointer border-b-[4px] border-borderColor px-4 py-1 text-white font-semibold  rounded-none shadow-md flex items-center justify-center leading-5 relative'
+        {!posterLoading ? (
+          <div className='mt-10 w-full mx-auto'>
+            <motion.div
+              className='flex flex-wrap gap-4 items-center justify-center w-full mx-auto'
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 20 }}
+              transition={{ duration: 0.4 }}
+              ref={parent}
+            >
+              {!loading ? (
+                <>
+                  {filteredPrograms.length > 0 ? (
+                    filteredPrograms.map((program, index) => (
+                      <motion.button
+                        key={index}
+                        onClick={() => handleProgramSelect(program)}
+                        style={{ backgroundColor: colors[index % colors.length] }}
+                        className='bg-[#605F5F] border-[1.6px] cursor-pointer border-b-[4px] border-borderColor px-4 py-1 text-white font-semibold rounded-none shadow-md flex items-center justify-center leading-5 relative'
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 20 }}
+                        transition={{ duration: 0.4 }}
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        {extractValidText(program?.name)}
+                        {isNewRelease(program?.last_updated) && (
+                          <span className='text-[10px] bg-red-500 text-white px-1 py-[0.1px] rounded-md ml-2 absolute -top-3 -right-4'>
+                            New
+                          </span>
+                        )}
+                      </motion.button>
+                    ))
+                  ) : (
+                    <motion.p
+                      className='text-gray-500 flex flex-col text-center'
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.5 }}
                     >
-                      {extractValidText(program?.name)}
-                      {isNewRelease(program?.created_at) && <span className='text-xs bg-red-500 text-white px-1 py-0.5 rounded-md ml-2 absolute top-0 right-0'>New</span>}
-                    </button>
-                  ))
-                ) : (
-                  <p className='text-gray-500'>No programs found.</p>
-                )}
-              </>
-            ) : (
-              <div className='flex items-center justify-center w-full py-6'>
-                <Loader className='animate-spin' />
-              </div>
-            )}
+                      No programs found.
+                      <img src={Empty} alt="empty" className="mt-2 max-w-[380px]" />
+                    </motion.p>
+                  )}
+                </>
+              ) : (
+                <div className='flex items-center justify-center w-full py-6'>
+                  {/* <Loader className='animate-spin' /> */}
+                  <img src={Loading} alt="loading" className="max-w-[360px]" />
+                </div>
+              )}
+            </motion.div>
           </div>
-        </div>
+        ) : (
+          <div className='flex items-center justify-center w-full py-6'>
+            <img src={Loading} alt="loading" className="max-w-[360px]" />
+          </div>
+        )}
       </section>
 
       <Dialog open={isDialogOpen} onOpenChange={handleOpenChange}>
@@ -255,17 +295,17 @@ function Index() {
             <DialogDescription></DialogDescription>
             <div className='pb-4'>
               <div className='min-h-[400px]'>
-                {loadingPoster ? (
+                {/* {loadingPoster ? (
                   <div className='flex items-center justify-center py-4'>
                     <Loader className='animate-spin' />
                   </div>
-                ) : (
+                ) : ( */}
                   <div className='flex items-center justify-center pt-6'>
                     <div className='w-fit h-fit' id='resultPosterId'>
                       <Poster data={selectedProgram} />
                     </div>
                   </div>
-                )}
+                {/* )} */}
 
                 <div className='flex items-center justify-center gap-2 mt-4 max-w-[300px] mx-auto'>
                   <button onClick={handleShare} className='flex flex-1 text-center justify-center items-center gap-1 border-2 border-borderColor px-2 py-1 hover:bg-black hover:text-white transition-all ease-in-out duration-300' ><Share2 className='w-4 h-4' /><p className='font-semibold'>Share</p></button>

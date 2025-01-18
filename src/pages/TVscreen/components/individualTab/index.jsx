@@ -1,7 +1,7 @@
 import { Empty } from '@/assets/elements';
 import { useState } from 'react';
 import IndividualCard from '@/components/IndividualCard';
-
+import { useAutoAnimate } from '@formkit/auto-animate/react';
 function IndividualTab({ data }) {
     const [expandedCategories, setExpandedCategories] = useState({});
 
@@ -13,7 +13,7 @@ function IndividualTab({ data }) {
             [index]: !prev[index],
         }));
     };
-
+    const [parent] = useAutoAnimate()
     function pickShadowColor(index) {
         switch (index) {
             case 0:
@@ -31,14 +31,12 @@ function IndividualTab({ data }) {
 
 
     return (
-        <div className="border border-customBlue p-6 px-10 rounded-[50px] bg-white/60 blur-10 z-10">
+        <div className="border border-customBlue p-6 px-10 rounded-[50px] bg-white/80 blur-10 z-10 w-full flex items-start">
 
-            <div className='mt-8 flex gap-4 w-full '>
-                <div className='px-2 w-[160px] relative flex flex-col items-center justify-center'>
-                    <h1 className='absolute -rotate-90 font-semibold right-0 whitespace-nowrap text-[48px] leading-[1px]'>
-                        Score Board
-                    </h1>
-                    <div className='bg-customBlue py-1 px-4 absolute -rotate-90 text-white font-semibold right-0 text-3xl'>
+            <div className='mt-8 flex  w-full flex-col gap-10 '>
+                <div className='px-2  relative flex flex-col items-center justify-center'>
+                    
+                    <div className='bg-customBlue py-1 px-4   text-white font-semibold  text-3xl'>
                         Individual
                     </div>
                 </div>
@@ -54,7 +52,7 @@ function IndividualTab({ data }) {
                         const title = category.title;
 
                         return (
-                            <div key={index} className="mb-8">
+                            <div key={index} className="mb-1">
                                 {winnersToShow.length > 0 && (
                                     <>
                                         {winnersToShow.map((individual, individualIndex) => (

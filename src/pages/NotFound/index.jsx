@@ -1,5 +1,5 @@
 import React from 'react';
-import Tovino from '@/assets/images/tovino.webp';
+import Tovino from '@/assets/gifs/tovino.webp';
 
 function NotFound() {
   return (
