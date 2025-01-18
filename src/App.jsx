@@ -1,4 +1,4 @@
-import { Home, NotFound, Result, Schedule, Stage, ScoreBoard } from './pages';
+import { Home, NotFound, Result, Schedule, Stage, ScoreBoard, TVscreen } from './pages';
 import Layout from '@/components/layout';
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import ReactGA from "react-ga4";
@@ -30,6 +30,10 @@ const routes = [
         element: <ScoreBoard />,
       },
     ],
+  },
+  {
+    path: "tvscreen",
+    element: <TVscreen />,
   },
   {
     path: "*",

@@ -117,6 +117,7 @@ const eventData = {
             {
                 id: 2,
                 name: "M.T VASUDEVAN NAIR",
+                stage: "Stage 2",
                 location: "RUSA BLOCK",
                 programs: [
                     { time: "6:00 PM", name: "DRAMA SANSKRIT" },
@@ -130,6 +131,7 @@ const eventData = {
             {
                 id: 1,
                 name: "CH MUHAMMED KOYA",
+                stage: "Stage 1",
                 location: "MAHOGANY PARK",
                 programs: [
                     { time: "9:30 AM", name: "MOHINIYATTAM" },
@@ -142,6 +144,7 @@ const eventData = {
             {
                 id: 2,
                 name: "M.T VASUDEVAN NAIR",
+                stage: "Stage 2",
                 location: "RUSA BLOCK",
                 programs: [
                     { time: "9:30 AM", name: "FOLK DANCE (FEMALE)" },
@@ -155,6 +158,7 @@ const eventData = {
             {
                 id: 3,
                 name: "MOYINKUTTY VAIDYAR",
+                stage: "Stage 3",
                 location: "OPPOSITE B.Ed BLOCK",
                 programs: [
                     { time: "9:30 AM", name: "MAPPILA PATTU (FEMALE)", },
@@ -164,6 +168,7 @@ const eventData = {
             {
                 id: 4,
                 name: "KAMALA SURAYYA",
+                stage: "Stage 4",
                 location: "NEAR BAMBOO LAKE",
                 programs: [
                     { time: "9:30 AM", name: "MONO ACT", },
@@ -172,6 +177,7 @@ const eventData = {
             {
                 id: 5,
                 name: "OOMMEN CHANDY",
+                stage: "Stage 5",
                 location: "B.Ed SEMINAR HALL",
                 programs: [
                     {
@@ -216,6 +222,7 @@ const eventData = {
             {
                 id: 6,
                 name: "SEETHI HAJI",
+                stage: "Stage 6",
                 location: "EMEA SEMINAR HALL",
                 programs: [
                     { time: "9:30 AM", name: "LIGHT MUSIC (FEMALE)" },
@@ -230,6 +237,7 @@ const eventData = {
                 id: 1,
                 name: "CH MUHAMMED KOYA",
                 location: "MAHOGANY PARK",
+                stage: "Stage 1",
                 programs: [
                     { time: "9:30 AM", name: "OPPANA" },
                     { time: "5:00 PM", name: "VATTAPATTU" }
@@ -238,6 +246,7 @@ const eventData = {
             {
                 id: 2,
                 name: "M.T VASUDEVAN NAIR",
+                stage: "Stage 2",
                 location: "RUSA BLOCK",
                 programs: [
                     { time: "9:30 AM", name: "MAARGAM KALI" },
@@ -248,6 +257,7 @@ const eventData = {
             {
                 id: 3,
                 name: "MOYINKUTTY VAIDYAR",
+                stage: "Stage 3",
                 location: "OPPOSITE B.Ed BLOCK",
                 programs: [
                     { time: "9:30 AM", name: "CHENDAMELAM" },
@@ -259,6 +269,7 @@ const eventData = {
             {
                 id: 4,
                 name: "KAMALA SURAYYA",
+                stage: "Stage 4",
                 location: "NEAR BAMBOO LAKE",
                 programs: [
                     { time: "9:30 AM", name: "GROUP SONG INDIAN" },
@@ -268,6 +279,7 @@ const eventData = {
             {
                 id: 5,
                 name: "OOMMEN CHANDY",
+                stage: "Stage 5",
                 location: "B.Ed SEMINAR HALL",
                 programs: [
                     { time: "9:30 AM", name: "POEM RECITATION MALAYALAM" },
@@ -282,6 +294,7 @@ const eventData = {
             {
                 id: 1,
                 name: "CH MUHAMMED KOYA",
+                stage: "Stage 1",
                 location: "MAHOGANY PARK",
                 programs: [
                     { time: "9:30 AM", name: "BARATHANATYAM" },
@@ -293,6 +306,7 @@ const eventData = {
             {
                 id: 2,
                 name: "M.T VASUDEVAN NAIR",
+                stage: "Stage 2",
                 location: "RUSA BLOCK",
                 programs: [
                     { time: "9:30 AM", name: "MIMICRY" },
@@ -304,6 +318,7 @@ const eventData = {
             {
                 id: 3,
                 name: "MOYINKUTTY VAIDYAR",
+                stage: "Stage 3",
                 location: "OPPOSITE B.Ed BLOCK",
                 programs: [
                     { time: "9:30 AM", name: "FOLK SONG GROUP" },
@@ -313,6 +328,7 @@ const eventData = {
                 id: 4,
                 name: "KAMALA SURAYYA",
                 location: "NEAR BAMBOO LAKE",
+                stage: "Stage 4",
                 programs: [
                     { time: "9:30 AM", name: "GROUP SONG WESTERN" },
                     { time: "12:30 PM", name: "MAPPILA PATTU GROUP" },
@@ -321,6 +337,7 @@ const eventData = {
             {
                 id: 5,
                 name: "OOMMEN CHANDY",
+                stage: "Stage 5",
                 location: "B.Ed SEMINAR HALL",
                 programs: [
                     { time: "12:30 PM", name: "WESTERN MUSIC (INDIVIDUAL)" },
@@ -329,6 +346,7 @@ const eventData = {
             {
                 id: 6,
                 name: "SEETHI HAJI",
+                stage: "Stage 6",
                 location: "EMEA SEMINAR HALL",
                 programs: [
                     { time: "9:30 AM", name: "CLASSICAL MUSIC (MALE)" },

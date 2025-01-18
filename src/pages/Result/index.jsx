@@ -163,15 +163,15 @@ function Index() {
     });
     html2canvas(poster,
       {
-        scale: 10, // Increase the scale for higher resolution (default is 1)
+        scale: 10, 
         useCORS: true
       }).then((canvas) => {
-        const imageUrl = canvas.toDataURL('image/png'); // Create image URL from canvas
+        const imageUrl = canvas.toDataURL('image/png'); 
         setImageUrl(imageUrl);
-        const link = document.createElement('a'); // Create a temporary link element
+        const link = document.createElement('a'); 
         link.href = imageUrl;
         if (selectedProgram) {
-          link.download = `${selectedProgram.programName}-result.png`; // Set the download attribute to the program name
+          link.download = `${selectedProgram.programName}-result.png`; 
         } else {
           link.download = 'poster.png';
         }
@@ -187,30 +187,24 @@ function Index() {
       action: "Click",
       label: "Share now result",
     });
-    // Capture the content of the element as a canvas
     html2canvas(poster,
       {
-        scale: 10, // Increase the scale for higher resolution (default is 1)
+        scale: 10, 
         useCORS: true
       }).then((canvas) => {
-        // Convert the canvas to a Blob
         canvas.toBlob(async (blob) => {
           if (!blob) return;
 
-          // Create a File object from the Blob
           const file = new File([blob], 'poster.png', { type: 'image/png' });
 
-          // Check if the Web Share API supports file sharing
           if (navigator.share) {
             try {
-              // Share the image as a file
               await navigator.share({
-                title: "Artify",
+                title: "Kalama",
                 url: 'https://czonekalama.in',
                 text: "Check out the winners! 🎉",
-                files: [file], // Pass the image file
+                files: [file], 
               });
-              // console.log('Shared successfully!');
             } catch (err) {
               console.error('Error sharing:', err);
             }
@@ -255,7 +249,7 @@ function Index() {
                       onClick={() => handleProgramSelect(program)}
                       key={index}
                       style={{ backgroundColor: colors[index % colors.length] }}
-                      className='bg-[#605F5F] border-[2px] cursor-pointer border-b-[4px] border-borderColor px-4 py-1 text-white font-semibold  rounded-none shadow-md flex items-center justify-center leading-5'
+                      className='bg-[#605F5F] border-[1.6px] cursor-pointer border-b-[4px] border-borderColor px-4 py-1 text-white font-semibold  rounded-none shadow-md flex items-center justify-center leading-5'
                     >
                       {program?.name}
                     </button>

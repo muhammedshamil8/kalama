@@ -1,3 +1,5 @@
+
+
 import React from "react";
 import {
     first_bg,
@@ -59,8 +61,8 @@ function index({ data }) {
             height: `${300 + totalParticipants * 40}px`,
         }} >
             <img src={data.stageStatus === "off_stage" ? topElement : topElementOnstage} alt="topElement" className='absolute top-0 left-0 w-full max-w-[70px]' />
-            <img src={data.stageStatus === "off_stage" ? rightElement : rightElementOnstage} alt="rightElement" className='absolute bottom-0 -right-[1px] z-10 max-w-[50px]' />
-            <img src={data.stageStatus === "off_stage" ? bottomElement : bottomElementOnstage} alt="bottomElement" className='absolute -bottom-[2px] left-0 right-0 w-full ' />
+            <img src={data.stageStatus === "off_stage" ? rightElement : rightElementOnstage} alt="rightElement" className='absolute bottom-0 right-0 z-10 max-w-[50px]' />
+            <img src={data.stageStatus === "off_stage" ? bottomElement : bottomElementOnstage} alt="bottomElement" className='absolute bottom-0 left-0 right-0 w-full ' />
 
             <div className="bg-yellow-400 absolute top-48 -left-2 right-0 bottom-0 w-10 h-10 blur-2xl rounded-full "></div>
             <div className="bg-orange-400 absolute  left-2/4 right-0 bottom-0 w-10 h-10 blur-2xl rounded-full "></div>
@@ -77,7 +79,7 @@ function index({ data }) {
                     <span>{ResultNumber(data.result_no)}</span>
                 </div>
             </div>
-            <div className='bg-[#220440] text-white px-2  mt-3 max-w-[220px]'>
+            <div className='bg-[#220440] text-white px-2  mt-3 max-w-[220px] text-[14px]'>
                 <span className={classNames('text-[14px] font-semibold ',
                     {
                         'text-[12px] ': data.programName.length > 20,
@@ -109,7 +111,7 @@ function index({ data }) {
             </div>
             <div className={classNames('flex justify-between w-full px-16 mt-8',
             {
-                'text-[12px] -leading-[2px]': data.programName.length > 20,
+                'text-[12px] ': data.programName.length > 20,
             }
             )}>
                 <img src={CreatorLogo} alt="" className='w-8' />
@@ -120,3 +122,4 @@ function index({ data }) {
 }
 
 export default index;
+

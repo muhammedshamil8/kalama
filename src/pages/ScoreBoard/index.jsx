@@ -23,8 +23,10 @@ function CollegeIcon({ color = 'white' }) {
 function Index() {
   const [activeTab, setActiveTab] = useState('college');
   const [colleges, setColleges] = useState([]);
+
   const [individuals, setIndividuals] = useState([]);
   const [individualAllRounder, setIndividualAllRounder] = useState([]);
+
   const [loading, setLoading] = useState(true);
   const ApiUrl = import.meta.env.VITE_API_URL;
 
@@ -36,66 +38,71 @@ function Index() {
         const data = await response.json();
 
         // Log the raw data for debugging
-        console.log(data);
+        // console.log(data);
 
         // Sort colleges by their total score
         const sortedColleges = data.data.results.sort((a, b) => b.totalScore - a.totalScore);
         setColleges(sortedColleges);
+
 
         // Prepare the formatted data for individual all-rounder categories
         const formattedData = [
           {
             title: 'Kalaprathiba',
             winners: data.data.genderTopScorers
-              .filter((scorer) => scorer.gender === 'male')
+              .filter((scorer) => scorer.gender === 'male')[0].topScorers
               .map((scorer) => ({
-                name: scorer.topScorer.name,
-                image: scorer.topScorer.image,
-                college: scorer.topScorer.college,
-                points: scorer.topScorer.score,
+                name: scorer.name,
+                image: scorer.image,
+                college: scorer.college,
+                points: scorer.score,
               }))
-              .sort((a, b) => b.points - a.points), 
+              .sort((a, b) => b.points - a.points),
           },
           {
             title: 'Kalathilakam',
             winners: data.data.genderTopScorers
-              .filter((scorer) => scorer.gender === 'female')
+              .filter((scorer) => scorer.gender === 'female')[0].topScorers
               .map((scorer) => ({
-                name: scorer.topScorer.name,
-                image: scorer.topScorer.image,
-                college: scorer.topScorer.college,
-                points: scorer.topScorer.score,
+                name: scorer.name,
+                image: scorer.image,
+                college: scorer.college,
+                points: scorer.score,
               }))
-              .sort((a, b) => b.points - a.points), 
+              .sort((a, b) => b.points - a.points),
           },
           {
             title: 'Sahithyaprathiba',
             winners: data.data.categoryTopScorers
-              .filter((scorer) => scorer.category === 'saahithyolsavam')
+              .filter((scorer) => scorer.category === 'saahithyolsavam')[0].topScorers
               .map((scorer) => ({
-                name: scorer.topScorer.name,
-                image: scorer.topScorer.image,
-                college: scorer.topScorer.college,
-                points: scorer.topScorer.score,
+                name: scorer.name,
+                image: scorer.image,
+                college: scorer.college,
+                points: scorer.score,
               }))
-              .sort((a, b) => b.points - a.points), 
+              .sort((a, b) => b.points - a.points),
           },
           {
             title: 'Chithrapradhiba',
             winners: data.data.categoryTopScorers
-              .filter((scorer) => scorer.category === 'chithrolsavam')
+              .filter((scorer) => scorer.category === 'chithrolsavam')[0].topScorers
               .map((scorer) => ({
-                name: scorer.topScorer.name,
-                image: scorer.topScorer.image,
-                college: scorer.topScorer.college,
-                points: scorer.topScorer.score,
+                name: scorer.name,
+                image: scorer.image,
+                college: scorer.college,
+                points: scorer.score,
               }))
-              .sort((a, b) => b.points - a.points), 
+              .sort((a, b) => b.points - a.points),
           },
         ];
 
         setIndividuals(formattedData);
-        console.log(formattedData);
+
+
+        // console.log(formattedData);
+
+
         const topScorers = data.data.topScorers.map((scorer) => ({
           name: scorer.name,
           image: scorer.image,
