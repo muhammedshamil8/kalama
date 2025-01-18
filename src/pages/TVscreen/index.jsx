@@ -88,9 +88,9 @@ function Index() {
 
 
     return (
-        <div className="w-full">
-            <section className='w-full  mx-auto mt-10 px-4'>
-                <div className='flex justify-between items-center max-w-[2600px] mx-auto p-10'>
+        <div className="w-full min-h-[100dvh]">
+            <section className='hidden 2xl:block w-full  mx-auto mt-10 px-4 '>
+                <div className='flex justify-between items-center w-full max-w-[2600px] mx-auto p-10'>
 
                     <div className='flex gap-1 items-center justify-center h-fit w-fit'>
                         <div>
@@ -105,8 +105,8 @@ function Index() {
                         <img src={Logo_GloryBoard} alt="Product Logo" className="mx-auto max-w-[180px]" />
                     </div>
                 </div>
-                <mian className="flex justify-between items-center w-full mt-10">
-                    <section className='w-full max-w-[900px] mt-10 px-4'>
+                <mian className="flex justify-between items-center w-full mt-10 mx-auto">
+                    <section className=' w-[30%] mt-10 px-4 flex-1  flex-grow'>
                         <div className="flex justify-center w-full  mx-auto   sm:px-0">
                             <CollegeTab data={colleges} />
                         </div>
@@ -116,17 +116,22 @@ function Index() {
                             <PosterTab />
                         </div>
                     </section>
-                    <section className='w-full max-w-[900px] mt-10 px-4'>
+                    <section className='w-[30%]  mt-10 px-4 flex-1 flex-gorw'>
                         <div className="flex justify-center w-full  mx-auto   sm:px-0">
                             <IndividualTab data={individuals} />
                         </div>
                     </section>
                 </mian>
 
-            </section>
 
                 <img src={Avatar_bl} alt="Bottom Left Avatar" className="absolute bottom-0 left-0 w-full max-w-[600px]" />
                 <img src={Avatar_br} alt="Bottom Right Avatar" className="absolute bottom-0 right-0 w-full max-w-[600px]" />
+            </section>
+
+
+            <div className="flex items-center justify-center w-full min-h-screen px-4 py-2 bg-slate-100 font-semibold 2xl:hidden">
+                This Page is optimized for TV screens only.
+            </div>
 
         </div>
     );

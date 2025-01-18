@@ -1,11 +1,12 @@
 import { Empty } from '@/assets/elements';
 import { useState } from 'react';
 import IndividualCard from '@/components/IndividualCard';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
 
 function IndividualTab({ data }) {
     const [expandedCategories, setExpandedCategories] = useState({});
-
-    console.log(data)
+    const [parent] = useAutoAnimate()
+    // console.log(data)
 
     const toggleExpand = (index) => {
         setExpandedCategories((prev) => ({
@@ -43,7 +44,7 @@ function IndividualTab({ data }) {
                 const title = category.title;
 
                 return (
-                    <div key={index} className="mb-8">
+                    <div key={index} className="max-w-[360px] mx-auto" ref={parent}>
                         {winnersToShow.length > 0 && (
                             <>
                                 {/* Render Top Scorer and Others (if expanded) */}
@@ -52,14 +53,16 @@ function IndividualTab({ data }) {
                                 ))}
 
                                 {/* Show More Button */}
-                                {/* {otherWinners.length > 0 && (
-                                    <button
-                                        onClick={() => toggleExpand(index)}
-                                        className="block mx-auto px-4 py-2 bg-customEmerald text-white font-bold rounded mt-2"
-                                    >
-                                        {isExpanded ? 'Show Less' : `Show More (${otherWinners.length} more)`}
-                                    </button>
-                                )} */}
+                                {otherWinners.length > 0 && (
+                                    <div className='flex items-end justify-end w-full mb-6'>
+                                        <button
+                                            onClick={() => toggleExpand(index)}
+                                            className="block px-4 py-1 border border-black text-black  font-bold  "
+                                        >
+                                            {isExpanded ? 'Show Less' : `Show More`}
+                                        </button>
+                                    </div>
+                                )}
                             </>
                         )}
                     </div>

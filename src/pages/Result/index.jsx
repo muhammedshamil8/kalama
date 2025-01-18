@@ -57,6 +57,7 @@ function Index() {
   const handleProgramSelect = async (program) => {
     setSelectedProgram(program);
     setLoadingPoster(true);
+
     try {
       const response = await fetch(`${ApiUrl}/result/event/${program._id}`, {
         method: 'GET',
@@ -70,74 +71,48 @@ function Index() {
       }
 
       const { data } = await response.json();
-      console.log(data);
+      // console.log("Fetched Data:", data);
 
+      // Format Data
       const formattedData = data.map((program) => ({
         programName: program.name,
         id: program._id,
         result_no: program.serial_number,
-        stageStatus: program.is_onstage ? 'on_stage' : 'off_stage',
-        is_group: program.winningRegistrations[0].eventRegistration.group_name ? true : false,
+        stageStatus: program.is_onstage,
+        is_group: program.is_group,
         winners: program.winningRegistrations.reduce((acc, winner) => {
-          const existingPosition = acc.find((w) => w.position === winner.position);
-
-          // Determine the display format for the winner (group or individuals)
-          // console.log(winner.eventRegistration);
-          const winnerDetails = winner.eventRegistration.group_name
-            ? {
-              groupName: winner.eventRegistration.group_name,
-              departmentName: winner.eventRegistration.departmentGroup
-            }
-            : {
-              participants: winner.eventRegistration.participants.user.map((participant) => ({
-                name: participant.name,
-                department: participant.college,
-                year: participant.year_of_study,
-              })),
-            };
-
-          if (existingPosition) {
-            // Add winner details to the existing position group
-            if (winnerDetails.groupName) {
-              existingPosition.groups = existingPosition.groups || [];
-              existingPosition.groups.push({
-                name: winnerDetails.groupName,
-                team: winnerDetails.departmentName,
-              });
-            } else {
-              existingPosition.participants.push(...winnerDetails.participants);
-            }
-          } else {
-            // Create a new group for this position
+          if (program.is_group && winner.eventRegistration.collegeName) {
+            // **Group Winners**
             acc.push({
               position: winner.position,
-              ...(winnerDetails.groupName
-                ? {
-                  groups: [{
-                    name: winnerDetails.groupName,
-                    team: winnerDetails.departmentName,
-                  }]
-                }
-                : { participants: winnerDetails.participants }),
+              name: winner.eventRegistration.collegeName,
+            });
+          } else {
+            // **Individual Winners**
+            winner.eventRegistration.participants.user.forEach((participant) => {
+              acc.push({
+                position: winner.position,
+                name: participant.name,
+                college: participant.college || "Unknown College",
+                year: participant.year_of_study || "N/A",
+              });
             });
           }
           return acc;
-        }, []).sort((a, b) => a.position - b.position),
+        }, []).sort((a, b) => a.position - b.position), // Sort by position
       }));
 
       setSelectedProgram(formattedData[0]);
       setIsDialogOpen(true);
-      console.log(formattedData[0]);
-      // console.log(formattedData[0]);
-      // console.log(program)
-      // setLoadingPoster(false);
+      console.log("Formatted Data:", formattedData[0]);
     } catch (error) {
       console.error('Failed to select program', error);
-      // setLoadingPoster(false);
     } finally {
       setLoadingPoster(false);
     }
   };
+
+
 
   const isNewRelease = (dateString) => {
     const currentDate = new Date();
@@ -146,7 +121,7 @@ function Index() {
     // Calculate the difference in hours
     const timeDifference = Math.abs(currentDate - programDate) / (1000 * 60 * 60);
 
-    return timeDifference <= 30; 
+    return timeDifference <= 30;
   };
 
   const handleOpenChange = () => {
@@ -163,15 +138,15 @@ function Index() {
     });
     html2canvas(poster,
       {
-        scale: 10, 
+        scale: 10,
         useCORS: true
       }).then((canvas) => {
-        const imageUrl = canvas.toDataURL('image/png'); 
+        const imageUrl = canvas.toDataURL('image/png');
         setImageUrl(imageUrl);
-        const link = document.createElement('a'); 
+        const link = document.createElement('a');
         link.href = imageUrl;
         if (selectedProgram) {
-          link.download = `${selectedProgram.programName}-result.png`; 
+          link.download = `${selectedProgram.programName}-result.png`;
         } else {
           link.download = 'poster.png';
         }
@@ -189,7 +164,7 @@ function Index() {
     });
     html2canvas(poster,
       {
-        scale: 10, 
+        scale: 10,
         useCORS: true
       }).then((canvas) => {
         canvas.toBlob(async (blob) => {
@@ -203,7 +178,7 @@ function Index() {
                 title: "Kalama",
                 url: 'https://czonekalama.in',
                 text: "Check out the winners! 🎉",
-                files: [file], 
+                files: [file],
               });
             } catch (err) {
               console.error('Error sharing:', err);
@@ -218,6 +193,11 @@ function Index() {
 
   const colors = ['#3592BA', '#00A99D', '#8DC63F', '#FF5733', '#FFC300'];
 
+  function extractValidText(text) {
+    const match = text.match(/^(.*?\s*\(EASTERN\)|.*?\s*\(WESTERN\))/);
+    // console.log(match);
+    return match ? match[1].trim() : text;
+  }
 
   return (
     <div className='w-full p-4'>
@@ -249,9 +229,10 @@ function Index() {
                       onClick={() => handleProgramSelect(program)}
                       key={index}
                       style={{ backgroundColor: colors[index % colors.length] }}
-                      className='bg-[#605F5F] border-[1.6px] cursor-pointer border-b-[4px] border-borderColor px-4 py-1 text-white font-semibold  rounded-none shadow-md flex items-center justify-center leading-5'
+                      className='bg-[#605F5F] border-[1.6px] cursor-pointer border-b-[4px] border-borderColor px-4 py-1 text-white font-semibold  rounded-none shadow-md flex items-center justify-center leading-5 relative'
                     >
-                      {program?.name}
+                      {extractValidText(program?.name)}
+                      {isNewRelease(program?.created_at) && <span className='text-xs bg-red-500 text-white px-1 py-0.5 rounded-md ml-2 absolute top-0 right-0'>New</span>}
                     </button>
                   ))
                 ) : (
@@ -268,7 +249,7 @@ function Index() {
       </section>
 
       <Dialog open={isDialogOpen} onOpenChange={handleOpenChange}>
-        <DialogContent className="max-h-[90vh] min-h-fit overflow-y-auto p-0 scale-100 lg:scale-125">
+        <DialogContent className="max-h-[90dvh] min-h-fit overflow-y-auto p-0 scale-100 lg:scale-125">
           <DialogHeader>
             <DialogTitle></DialogTitle>
             <DialogDescription></DialogDescription>
@@ -281,7 +262,7 @@ function Index() {
                 ) : (
                   <div className='flex items-center justify-center pt-6'>
                     <div className='w-fit h-fit' id='resultPosterId'>
-                      <Poster data={selectedProgram}/>
+                      <Poster data={selectedProgram} />
                     </div>
                   </div>
                 )}
@@ -304,3 +285,4 @@ function Index() {
 }
 
 export default Index;
+
