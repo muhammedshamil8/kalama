@@ -14,6 +14,10 @@ import rightElementOnstage from './right_bg_on.svg';
 import sponserLogo from './sponser_logo.svg';
 import topElement from './top_corner.svg';
 import topElementOnstage from './top_corner_on.svg';
+import blur1 from './blur1.svg'
+import blur2 from './blur2.svg'
+import blur3 from './blur3.svg'
+
 
 export {
     first_bg,
@@ -31,5 +35,8 @@ export {
     rightElementOnstage,
     sponserLogo,
     topElement,
-    topElementOnstage
+    topElementOnstage,
+    blur1,
+    blur2,
+    blur3
 };

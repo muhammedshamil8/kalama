@@ -2,6 +2,7 @@ import React from 'react';
 import { Avatar_bl, Avatar_br } from '@/assets/elements';
 import { Logo_p_logo } from '@/assets/logos';
 import { Outlet, useOutletContext } from "react-router-dom";
+import { motion } from "motion/react";
 
 const Layout = () => {
   return (
@@ -13,11 +14,13 @@ const Layout = () => {
       </main>
 
       {/* Footer Section */}
-      <footer className="flex justify-center items-center w-full relative">
+      <motion.footer initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0}}
+          transition={{ duration: .5, ease: "easeOut", delay: 2}} className="flex justify-center items-center w-full relative">
         <img src={Avatar_bl} alt="Bottom Left Avatar" className="absolute bottom-0 left-0" />
         <img src={Logo_p_logo} alt="Logo" className=" pb-14 max-w-[100px] " />
         <img src={Avatar_br} alt="Bottom Right Avatar" className="absolute bottom-0 right-0" />
-      </footer>
+      </motion.footer>
     </div>
   );
 };

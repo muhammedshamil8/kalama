@@ -18,6 +18,9 @@ import {
     sponserLogo,
     topElement,
     topElementOnstage,
+    blur1,
+    blur2,
+    blur3
 } from "@/assets/poster/index.js";
 import classNames from 'classnames';
 
@@ -79,9 +82,10 @@ function index({ data }) {
             <img src={data.stageStatus === "off_stage" ? rightElement : rightElementOnstage} alt="rightElement" className='absolute bottom-0 right-0 z-10 max-w-[50px]' />
             <img src={data.stageStatus === "off_stage" ? bottomElement : bottomElementOnstage} alt="bottomElement" className='absolute bottom-0 left-0 right-0 w-full ' />
 
-            <div className="bg-yellow-400 absolute top-48 -left-2 right-0 bottom-0 w-10 h-10 blur-2xl rounded-full "></div>
-            <div className="bg-orange-400 absolute  left-2/4 right-0 bottom-0 w-10 h-10 blur-2xl rounded-full "></div>
-            <div className="bg-violet-500 absolute  -top-5 right-1/4 w-14 h-14 blur-2xl rounded-full "></div>
+            <img src={blur1} className=" absolute top-28 left-0 w-24  " />
+            <img src={blur3} className="absolute  left-2/4 right-0 bottom-0 w-36" />
+            <img src={blur2} className="absolute  top-0 right-1/4 w-36" />
+            
             <div className="flex justify-between flex-col h-full">
                 <div className="flex-1">
 
