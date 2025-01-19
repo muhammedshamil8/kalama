@@ -245,12 +245,12 @@ function Index() {
                         key={index}
                         onClick={() => handleProgramSelect(program)}
                         style={{ backgroundColor: colors[index % colors.length] }}
-                        className='bg-[#605F5F] border-[1.6px] cursor-pointer border-b-[4px] border-borderColor px-4 py-1 text-white font-semibold rounded-none shadow-md flex items-center justify-center leading-5 relative'
+                        className='bg-[#605F5F] border-[1.6px] cursor-pointer border-b-[4px] hover:border-b-[2px] border-borderColor px-4 py-1 text-white font-semibold rounded-none shadow-md flex items-center justify-center leading-5 relative'
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 20 }}
                         transition={{ duration: 0.4 }}
-                        whileHover={{ scale: 1.1 }}
+                        // whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.95 }}
                       >
                         {extractValidText(program?.name)}
@@ -262,15 +262,23 @@ function Index() {
                       </motion.button>
                     ))
                   ) : (
-                    <motion.p
-                      className='text-gray-500 flex flex-col text-center'
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.5 }}
-                    >
-                      No programs found.
-                      <img src={Empty} alt="empty" className="mt-2 max-w-[380px]" />
-                    </motion.p>
+                    programs.length === 0 ? (
+                      <div>
+                        <p className='text-gray-500 flex flex-col text-center'>
+                          Not Results Published Yet {console.log(programs.length)}
+                        </p>
+                      </div>
+                    ) : (
+                      <motion.p
+                        className='text-gray-500 flex flex-col text-center'
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.5 }}
+                      >
+                        No Results found.
+                        <img src={Empty} alt="empty" className="mt-2 max-w-[380px]" />
+                      </motion.p>
+                    )
                   )}
                 </>
               ) : (
@@ -300,11 +308,11 @@ function Index() {
                     <Loader className='animate-spin' />
                   </div>
                 ) : ( */}
-                  <div className='flex items-center justify-center pt-6'>
-                    <div className='w-fit h-fit' id='resultPosterId'>
-                      <Poster data={selectedProgram} />
-                    </div>
+                <div className='flex items-center justify-center pt-6'>
+                  <div className='w-fit h-fit' id='resultPosterId'>
+                    <Poster data={selectedProgram} />
                   </div>
+                </div>
                 {/* )} */}
 
                 <div className='flex items-center justify-center gap-2 mt-4 max-w-[300px] mx-auto'>

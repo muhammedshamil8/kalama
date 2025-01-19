@@ -17,6 +17,9 @@ import topElementOnstage from './top_corner_on.svg';
 import blur1 from './blur1.svg'
 import blur2 from './blur2.svg'
 import blur3 from './blur3.svg'
+import blur4 from './blur4.svg'
+import blur5 from './blur5.svg'
+import blur6 from './blur6.svg'
 
 
 export {
@@ -38,5 +41,8 @@ export {
     topElementOnstage,
     blur1,
     blur2,
-    blur3
+    blur3,
+    blur4,
+    blur5,
+    blur6
 };
