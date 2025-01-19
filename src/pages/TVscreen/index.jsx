@@ -191,9 +191,9 @@ function Index() {
                         </div>
                     </section>
                     <section className="w-full max-w-[800px]  px-4 flex flex-col gap-12">
-                        <div className="flex justify-center w-full mx-auto sm:px-0 " >
+                        {/* <div className="flex justify-center w-full mx-auto sm:px-0 " >
                             <PosterTab data={programs} loading={PosterLoading} />
-                        </div>
+                        </div> */}
                         <div className='bg-customBlue text-white rounded-xl max-w-[400px] mx-auto flex border border-customBlue mt-10 overflow-hidden' style={{ boxShadow: '0px 2px 14px 2px rgba(0, 0, 0, 0.25)' }}>
                             <div className='p-3 flex flex-col items-center justify-center gap-1 text-center'>
                                 <div>
