@@ -175,7 +175,7 @@ function Index() {
     return (
         <div className="w-full h-[100vh] relative overflow-hidden p-4 select-none">
             <section className="hidden lg:block w-full mx-auto">
-                <div className="flex justify-between items-center w-full max-w-[90vw] mx-auto p-4">
+                <div className="flex justify-between items-center w-full max-w-[90vw] mx-auto px-4">
                     <div className="flex gap-4 items-center justify-center h-fit w-fit">
                         <div>
                             <img src={Logo_kalama} alt="Kalama Logo" className="mx-auto max-w-[10vh] w-full" />
@@ -193,22 +193,20 @@ function Index() {
                     <div >
                         {/* <img src={Logo_GloryBoard} alt="Product Logo" className="mx-auto max-w-[20vw]" /> */}
                         
-                        <div className='bg-customBlue text-white rounded-xl max-w-[400px] mx-auto flex border border-customBlue mt-10 overflow-hidden' style={{ boxShadow: '0px 2px 14px 2px rgba(0, 0, 0, 0.25)' }}>
+                        <div className='bg-customBlue text-white rounded-xl max-w-[300px] mx-auto flex border border-customBlue mt-10 overflow-hidden' style={{ boxShadow: '0px 2px 14px 2px rgba(0, 0, 0, 0.25)' }}>
                             <div className='p-2 flex flex-col items-center justify-center gap-1 text-center'>
                                 <div>
-                                    <h1 className='text-lg font-bold '>Scan the QR Code
+                                    <h1 className='font-bold text-xs'>Scan the QR Code
                                     </h1>
-                                    <h3 className='text-md font-medium '>to Explore More</h3>
+                                    <h3 className='text-xs font-thin'>to Explore More</h3>
                                 </div>
 
-                                <div className='mt-1'>
-                                    <p className='text-sm'>Visit Website:
-                                    </p>
+                                <div className=''>  
                                     <div className='bg-white px-2 text-customBlue max-w-fit mx-auto font-semibold'>czonekalama.in</div>
                                 </div>
                             </div>
-                            <div className='bg-white p-3'>
-                                <img src={QrCode} width={100} height={100} alt='qr code' />
+                            <div className='bg-white p-2 flex justify-center items-center'>
+                                <img src={QrCode} width={50} height={50} alt='qr code' />
                             </div>
                         </div>
                     </div>
@@ -219,7 +217,7 @@ function Index() {
                 {showPoster ? (
                     <TvPoster />
                 ) : (
-                <main className="flex justify-around items-start w-full gap-10 px-4 pt-6">
+                <main className="flex justify-around items-start w-full gap-10 px-4">
                         <div className="flex justify-center w-full mx-auto sm:px-0 px-4 flex-1">
                             <CollegeTab data={colleges} />
                         </div>
