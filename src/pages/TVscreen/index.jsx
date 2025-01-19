@@ -30,12 +30,12 @@ function Index() {
         fetchData();
     }, 30000);
 
-    const intervalId2 = setInterval(() => {
-        setShowPoster(!showPoster);
-    }, 1000 * (showPoster ? 60 : 20));
+    // const intervalId2 = setInterval(() => {
+    //     setShowPoster(!showPoster);
+    // }, 1000 * (showPoster ? 60 : 20));
 
     // Cleanup the interval when the component is unmounted or the effect re-runs
-    return () => clearInterval(intervalId,intervalId2);
+    return () => clearInterval(intervalId);
 }, [showPoster]);
 
     const fetchData = async () => {
