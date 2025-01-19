@@ -164,7 +164,7 @@ function Index() {
 
     return (
         <div className="w-full h-[100vh] relative overflow-hidden p-4 select-none">
-            <section className="hidden lg:block w-full mx-auto  px-4">
+            <section className="hidden lg:block w-full mx-auto">
                 <div className="flex justify-between items-center w-full max-w-[90vw] mx-auto p-4">
                     <div className="flex gap-4 items-center justify-center h-fit w-fit">
                         <div>
@@ -184,12 +184,10 @@ function Index() {
                         <img src={Logo_GloryBoard} alt="Product Logo" className="mx-auto max-w-[20vw]" />
                     </div>
                 </div>
-                <main className="flex justify-around items-start w-full mt-10 mx-auto max-w-[90vw]">
-                    <section className="w-[35%]  px-4 flex-1">
-                        <div className="flex justify-center w-full mx-auto sm:px-0">
+                <main className="flex justify-around items-start w-full gap-24 px-4 pt-6">
+                        <div className="flex justify-center w-full mx-auto sm:px-0 px-4 flex-1">
                             <CollegeTab data={colleges} />
                         </div>
-                    </section>
                     {/* <section className="w-full max-w-[800px]  px-4 flex flex-col gap-12">
                         <div className="flex justify-center w-full mx-auto sm:px-0 " >
                             <PosterTab data={programs} loading={PosterLoading} />
@@ -214,11 +212,9 @@ function Index() {
                             </div>
                         </div>
                     </section> */}
-                    <section className="w-[35%]  px-4 flex-1">
-                        <div className="flex justify-center w-full mx-auto sm:px-0">
+                        <div className="flex justify-center w-full mx-auto sm:px-0 px-4 flex-1">
                             <IndividualTab data={individuals} />
                         </div>
-                    </section>
                 </main>
 
                 <img src={Avatar_bl} alt="Bottom Left Avatar" className="absolute bottom-0 left-0 w-full max-w-[25vw]" />
