@@ -3,6 +3,7 @@ import Layout from '@/components/layout';
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import ReactGA from "react-ga4";
 import { useEffect } from 'react';
+import TvPoster from './pages/TVscreen/PosterPage';
 
 const routes = [
   {
@@ -34,6 +35,10 @@ const routes = [
   {
     path: "tv",
     element: <TVscreen />,
+  },
+  {
+    path: 'tv2',
+    element: <TvPoster />,
   },
   {
     path: "*",
