@@ -16,7 +16,7 @@ function Stage() {
     return colors[rank % 3];
   }
   return (
-    <div className="w-full">
+    <div className="w-full select-none">
       <Header title="Stage" href="/schedule" color={pickColor(id)} />
 
       <section className='p-3 max-w-[500px] mx-auto mt-6'>

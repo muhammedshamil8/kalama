@@ -60,7 +60,7 @@ function index({ data, loading }) {
   };
 
   if (loading) {
-    return <div key={index} className='border border-customBlue  rounded-[50px] bg-white/20  min-w-fit max-w-[600px] min-h-[300px]  overflow-hidden'><div className="min-w-[600px] min-h-[500px] bg-slate-200 animate-pulse text-center ">Loading...</div>
+    return <div key={index} className='border border-customBlue  rounded-[50px] bg-white/20  min-w-fit max-w-[600px] min-h-[300px] mb-20 overflow-hidden'><div className="min-w-[380px] min-h-[400px] bg-slate-200 animate-pulse text-center scale-125">Loading...</div>
     </div>
   }
 
@@ -70,8 +70,8 @@ function index({ data, loading }) {
 
   return (
     <section>
-      <div className="slider-container min-w-[600px] max-w-[600px] min-h-[600px]">
-        <Slider {...settings} className='min-w-[600px] max-w-[600px]'>
+      <div className="slider-container min-w-[600px] max-w-[600px] ">
+        <Slider {...settings} className='min-w-[360px] max-w-[360px] mx-auto scale-125 mt-24'>
           {data.map((poster, index) => (
             <div key={index} className='border border-customBlue  mb-10 rounded-[50px] bg-white/20  min-w-fit max-w-[600px] min-h-[300px]  overflow-hidden'>
               <Poster data={poster} />

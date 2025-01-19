@@ -186,11 +186,11 @@ const eventData = {
                     },
                     {
                         time: "10:30 AM",
-                        name: "THUKAL VADHYANGAL (EASTERN) 2. TABALA/PAKKAVADHYAM"
+                        name: "THUKAL VADHYANGAL (EASTERN)  TABALA/PAKKAVADHYAM"
                     },
                     {
                         time: "11:30 AM",
-                        name: "THUKAL VADHYANGAL (EASTERN) 3. MRIDHANGAM/GANJIRA/GHADAM/THAKIL"
+                        name: "THUKAL VADHYANGAL (EASTERN)  MRIDHANGAM/GANJIRA/GHADAM/THAKIL"
                     },
                     {
                         time: "1:00 PM",
@@ -350,7 +350,7 @@ const eventData = {
                 location: "EMEA SEMINAR HALL",
                 programs: [
                     { time: "9:30 AM", name: "CLASSICAL MUSIC (MALE)" },
-                    { time: "10:30 AM", name: "CLASSICAL MUSIC (FEAMLE)" },
+                    { time: "10:30 AM", name: "CLASSICAL MUSIC (FEMALE)" },
                     { time: "3:00 PM", name: "SEMICLASSICAL MUSIC" },
                 ]
             }

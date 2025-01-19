@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Header from '@/components/ui/Header';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { eventData } from '@/const/StageData';
 import { motion, AnimatePresence } from "motion/react";
 import { SearchIcon } from '@/assets/icons';
@@ -14,6 +14,11 @@ function Schedule() {
   const [filteredStages, setFilteredStages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [parent] = useAutoAnimate()
+  const { dateState } = useParams();
+  // console.log(dateState);
+  useEffect(() => {
+    setSelectedDate(dateState);
+  }, [dateState]);
 
   useEffect(() => {
     const filterStages = () => {
@@ -39,7 +44,7 @@ function Schedule() {
       // Reset when no search term
       setFilteredStages([]);
       document.getElementById('search').value = "";
-      setSelectedDate(Object.keys(eventData)[0]);
+      setSelectedDate(dateState);
     }
   }, [searchTerm]);
 
@@ -79,11 +84,13 @@ function Schedule() {
   const handleDateSelect = (date) => {
     setSearchTerm("");
     document.getElementById('search').value = "";
+
     setSelectedDate(date);
+    navigate(`/schedule/${date}`);
   }
 
   return (
-    <div className="w-full">
+    <div className="w-full select-none">
       <Header title="Schedule" href="/" />
 
       <section className='mt-10'>
