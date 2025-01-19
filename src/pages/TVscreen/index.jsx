@@ -14,9 +14,14 @@ function Index() {
     const [filteredPrograms, setFilteredPrograms] = useState([]);
     const ApiUrl = import.meta.env.VITE_API_URL;
     const [PosterLoading, setPosterLoading] = useState(true);
+
+    
     useEffect(() => {
         // Fetching Data concurrently
-        const fetchData = async () => {
+        fetchData();
+    }, []);
+
+    const fetchData = async () => {
             setLoading(true);
             try {
                 const [leaderboardResponse, eventsResponse] = await Promise.all([
@@ -32,51 +37,43 @@ function Index() {
                 const formattedData = [
                     {
                         title: 'Kalaprathiba',
-                        winners: leaderboardData.data.genderTopScorers
-                            .filter((scorer) => scorer.gender === 'male')[0].topScorers
-                            .map((scorer) => ({
+                        winners: leaderboardData.data.genderTopScorers.filter((scorer) => scorer.gender === 'male')[0]?.topScorers?.map((scorer) => ({
                                 name: scorer.name,
                                 image: scorer.image,
                                 college: scorer.college,
                                 points: scorer.score,
                             }))
-                            .sort((a, b) => b.points - a.points),
+                            .sort((a, b) => b.points - a.points) || [],
                     },
                     {
                         title: 'Kalathilakam',
-                        winners: leaderboardData.data.genderTopScorers
-                            .filter((scorer) => scorer.gender === 'female')[0].topScorers
-                            .map((scorer) => ({
+                        winners: leaderboardData.data.genderTopScorers.filter((scorer) => scorer.gender === 'female')[0]?.topScorers?.map((scorer) => ({
                                 name: scorer.name,
                                 image: scorer.image,
                                 college: scorer.college,
                                 points: scorer.score,
                             }))
-                            .sort((a, b) => b.points - a.points),
+                            .sort((a, b) => b.points - a.points) || [],
                     },
                     {
                         title: 'Sahithyaprathiba',
-                        winners: leaderboardData.data.categoryTopScorers
-                            .filter((scorer) => scorer.category === 'saahithyolsavam')[0].topScorers
-                            .map((scorer) => ({
+                        winners: leaderboardData.data.categoryTopScorers.filter((scorer) => scorer.category === 'saahithyolsavam')[0]?.topScorers?.map((scorer) => ({
                                 name: scorer.name,
                                 image: scorer.image,
                                 college: scorer.college,
                                 points: scorer.score,
                             }))
-                            .sort((a, b) => b.points - a.points),
+                            .sort((a, b) => b.points - a.points) || [],
                     },
                     {
                         title: 'Chithrapradhiba',
-                        winners: leaderboardData.data.categoryTopScorers
-                            .filter((scorer) => scorer.category === 'chithrolsavam')[0].topScorers
-                            .map((scorer) => ({
+                        winners: leaderboardData.data.categoryTopScorers.filter((scorer) => scorer.category === 'chithrolsavam')[0]?.topScorers?.map((scorer) => ({
                                 name: scorer.name,
                                 image: scorer.image,
                                 college: scorer.college,
                                 points: scorer.score,
                             }))
-                            .sort((a, b) => b.points - a.points),
+                            .sort((a, b) => b.points - a.points) || [],
                     },
                 ];
 
@@ -99,9 +96,6 @@ function Index() {
                 setLoading(false);
             }
         };
-
-        fetchData();
-    }, []);
 
     const handleProgramSelect = async (program) => {
         try {
@@ -188,7 +182,7 @@ function Index() {
                             <CollegeTab data={colleges} />
                         </div>
                     </section>
-                    <section className="w-full max-w-[800px]  px-4 flex flex-col">
+                    <section className="w-full max-w-[800px]  px-4 flex flex-col gap-12">
                         <div className="flex justify-center w-full mx-auto sm:px-0 scale-110" >
                             <PosterTab data={programs} loading={PosterLoading} />
                         </div>
