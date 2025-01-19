@@ -146,7 +146,7 @@ function Index() {
     });
     html2canvas(poster,
       {
-        scale: 10,
+        scale: 6,
         useCORS: true
       }).then((canvas) => {
         const imageUrl = canvas.toDataURL('image/png');
@@ -172,7 +172,7 @@ function Index() {
     });
     html2canvas(poster,
       {
-        scale: 10,
+        scale: 6,
         useCORS: true
       }).then((canvas) => {
         canvas.toBlob(async (blob) => {

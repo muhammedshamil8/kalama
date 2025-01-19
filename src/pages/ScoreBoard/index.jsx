@@ -38,78 +38,71 @@ function Index() {
         const data = await response.json();
 
         // Log the raw data for debugging
-        // console.log(data);
-
+        
         // Sort colleges by their total score
         const sortedColleges = data.data.results.sort((a, b) => b.totalScore - a.totalScore);
         setColleges(sortedColleges);
-
+        
 
         // Prepare the formatted data for individual all-rounder categories
         const formattedData = [
           {
             title: 'Kalaprathiba',
             winners: data.data.genderTopScorers
-              .filter((scorer) => scorer.gender === 'male')[0].topScorers
-              .map((scorer) => ({
+              .filter((scorer) => scorer.gender === 'male')[0]?.topScorers?.map((scorer) => ({
                 name: scorer.name,
                 image: scorer.image,
                 college: scorer.college,
                 points: scorer.score,
               }))
-              .sort((a, b) => b.points - a.points),
+              .sort((a, b) => b.points - a.points) || [],
           },
           {
             title: 'Kalathilakam',
             winners: data.data.genderTopScorers
-              .filter((scorer) => scorer.gender === 'female')[0].topScorers
-              .map((scorer) => ({
+              .filter((scorer) => scorer.gender === 'female')[0]?.topScorers?.map((scorer) => ({
                 name: scorer.name,
                 image: scorer.image,
                 college: scorer.college,
                 points: scorer.score,
               }))
-              .sort((a, b) => b.points - a.points),
+              .sort((a, b) => b.points - a.points) || [],
           },
           {
             title: 'Sahithyaprathiba',
             winners: data.data.categoryTopScorers
-              .filter((scorer) => scorer.category === 'saahithyolsavam')[0].topScorers
-              .map((scorer) => ({
+              .filter((scorer) => scorer.category === 'saahithyolsavam')[0]?.topScorers?.map((scorer) => ({
                 name: scorer.name,
                 image: scorer.image,
                 college: scorer.college,
                 points: scorer.score,
               }))
-              .sort((a, b) => b.points - a.points),
+              .sort((a, b) => b.points - a.points) || [],
           },
           {
             title: 'Chithrapradhiba',
             winners: data.data.categoryTopScorers
-              .filter((scorer) => scorer.category === 'chithrolsavam')[0].topScorers
-              .map((scorer) => ({
+              .filter((scorer) => scorer.category === 'chithrolsavam')[0]?.topScorers?.map((scorer) => ({
                 name: scorer.name,
                 image: scorer.image,
                 college: scorer.college,
                 points: scorer.score,
               }))
-              .sort((a, b) => b.points - a.points),
-          },
+              .sort((a, b) => b.points - a.points) || [],
+          }
         ];
+
 
         setIndividuals(formattedData);
 
 
-        // console.log(formattedData);
-
-
-        const topScorers = data.data.topScorers.map((scorer) => ({
-          name: scorer.name,
-          image: scorer.image,
-          college: scorer.college,
-          points: scorer.total_score,
-        })).sort((a, b) => b.points - a.points);
-        setIndividualAllRounder(topScorers);
+        // const topScorers = data.data?.topScorers?.map((scorer) => ({
+        //   name: scorer.name,
+        //   image: scorer.image,
+        //   college: scorer.college,
+        //   points: scorer.total_score,
+        // })).sort((a, b) => b.points - a.points) || [];
+        // setIndividualAllRounder(topScorers);
 
       } catch (error) {
         console.error('Error fetching leaderboard data:', error);
@@ -151,6 +144,7 @@ function Index() {
           <p className="text-center text-gray-500 mt-4">Loading...</p>
         ) : (
           <div className=''>
+            {console.log(individuals)}
             {activeTab === 'college' ? <CollegeTab data={colleges} /> : <IndividualTab data={individuals} />}
           </div>
 

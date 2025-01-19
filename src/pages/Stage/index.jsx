@@ -17,7 +17,7 @@ function Stage() {
   }
   return (
     <div className="w-full select-none">
-      <Header title="Stage" href="/schedule" color={pickColor(id)} />
+      <Header title="Stage" href={`/schedule/${date}`} color={pickColor(id)} />
 
       <section className='p-3 max-w-[500px] mx-auto mt-6'>
         <div className='border-borderColor border p-2'>
