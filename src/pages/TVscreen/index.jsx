@@ -164,7 +164,7 @@ function Index() {
 
     return (
         <div className="w-full min-h-[100vh] relative overflow-hidden p-4 select-none">
-            <section className="hidden 2xl:block w-full mx-auto mt-10 px-4">
+            <section className="hidden lg:block w-full mx-auto mt-10 px-4">
                 <div className="flex justify-between items-center w-full max-w-[90vw] mx-auto p-10">
                     <div className="flex gap-4 items-center justify-center h-fit w-fit">
                         <div>
@@ -246,7 +246,7 @@ function Index() {
                 />
             </section>
 
-            <div className="flex items-center justify-center w-full min-h-screen px-4 py-2 bg-slate-100 font-semibold 2xl:hidden">
+            <div className="flex items-center justify-center w-full min-h-screen px-4 py-2 bg-slate-100 font-semibold lg:hidden">
                 This Page is optimized for TV screens only.
             </div>
         </div>
