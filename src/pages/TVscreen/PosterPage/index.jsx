@@ -126,7 +126,7 @@ function index() {
 
   return (
     <section>
-      <div className=" mx-auto overflow-hidden  p-4">
+      <div className=" mx-auto overflow-hidden flex justify-center items-center  p-4">
       <Swiper
        centeredSlides={true}
        autoplay={{
@@ -140,7 +140,7 @@ function index() {
         pagination={{
           clickable: true,
         }}
-        className="mySwiper flex"
+        className="mySwiper"
       >
          {programs.map((poster, index) => (
              <SwiperSlide className="flex items-center justify-center">
