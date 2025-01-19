@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Header from '@/components/ui/Header';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { eventData } from '@/const/StageData';
 import { motion, AnimatePresence } from "motion/react";
 import { SearchIcon } from '@/assets/icons';
@@ -14,6 +14,11 @@ function Schedule() {
   const [filteredStages, setFilteredStages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [parent] = useAutoAnimate()
+  const { dateState } = useParams();
+  // console.log(dateState);
+  useEffect(() => {
+    setSelectedDate(dateState);
+  }, [dateState]);
 
   useEffect(() => {
     const filterStages = () => {
@@ -38,6 +43,8 @@ function Schedule() {
     } else {
       // Reset when no search term
       setFilteredStages([]);
+      document.getElementById('search').value = "";
+      setSelectedDate(dateState);
     }
   }, [searchTerm]);
 
@@ -45,6 +52,9 @@ function Schedule() {
   const handleSearchChange = (e) => {
     if (e.target.value === "") {
       setSelectedDate(Object.keys(eventData)[0]);
+      setSearchTerm("");
+      document.getElementById('search').value = "";
+      // document.getElementById('search').innerHTML = "";
     } else {
       setSelectedDate("");
       setSearchTerm(e.target.value);
@@ -72,13 +82,30 @@ function Schedule() {
     );
   });
 
+  function getDateByProgramName(programName, eventData) {
+    for (const [date, data] of Object.entries(eventData)) {
+      for (const stage of data.stages) {
+        for (const program of stage.programs) {
+          if (program.name.toLowerCase() === programName.toLowerCase()) {
+            return date; // Return the date if a match is found
+          }
+        }
+      }
+    }
+    return null; // Return null if no match is found
+  }
+  
+
   const handleDateSelect = (date) => {
     setSearchTerm("");
+    document.getElementById('search').value = "";
+
     setSelectedDate(date);
+    navigate(`/schedule/${date}`);
   }
 
   return (
-    <div className="w-full">
+    <div className="w-full select-none">
       <Header title="Schedule" href="/" />
 
       <section className='mt-10'>
@@ -115,7 +142,8 @@ function Schedule() {
           <div className="flex items-center justify-center w-full p-2 border border-gray-800 shadow-sm max-w-[400px] mx-auto focus-within:border-blue-500 focus-within:shadow-md">
             <img src={SearchIcon} alt="Search Icon" className="w-6 h-6" />
             <input
-              type="text"
+              type="search"
+              id="search"
               placeholder="Search programs..."
               value={searchTerm}
               onChange={handleSearchChange}
@@ -152,6 +180,7 @@ function Schedule() {
                         <div className="p-2 text-center text-white cursor-pointer bg-black mb-1">
                           <h2 className="text-md font-bold pb-0">{stage.name}</h2>
                           <p className="text-2xl font-black uppercase">{stage.stage}</p>
+                          <p className="text-sm  text-gray-400 mt-1">{getDateByProgramName(stage.programs[0].name, eventData)}</p>
                         </div>
 
                         {/* Program List */}

@@ -188,11 +188,11 @@ function Index() {
                             <CollegeTab data={colleges} />
                         </div>
                     </section>
-                    <section className="w-full max-w-[900px]  px-4 flex flex-col">
-                        <div className="flex justify-center w-full mx-auto sm:px-0">
+                    <section className="w-full max-w-[800px]  px-4 flex flex-col">
+                        <div className="flex justify-center w-full mx-auto sm:px-0 scale-110" >
                             <PosterTab data={programs} loading={PosterLoading} />
                         </div>
-                        <div className='bg-customBlue text-white rounded-xl max-w-[400px] mx-auto flex border border-customBlue mt-10 overflow-hidden' style={{ boxShadow: '0px 2px 14px 2px rgba(0, 0, 0, 0.25)' }}>
+                        <div className='bg-customBlue text-white rounded-xl scale-110 max-w-[400px] mx-auto flex border border-customBlue mt-10 overflow-hidden' style={{ boxShadow: '0px 2px 14px 2px rgba(0, 0, 0, 0.25)' }}>
                             <div className='p-3 flex flex-col items-center justify-center gap-1 text-center'>
                                 <div>
                                     <h1 className='text-lg font-bold '>Scan the QR Code

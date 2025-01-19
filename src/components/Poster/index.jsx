@@ -20,7 +20,10 @@ import {
     topElementOnstage,
     blur1,
     blur2,
-    blur3
+    blur3,
+    blur4,
+    blur5,
+    blur6
 } from "@/assets/poster/index.js";
 import classNames from 'classnames';
 
@@ -79,13 +82,14 @@ function index({ data }) {
         <div className={`relative flex items-center flex-col w-[360px] min-h-[360px] mx-auto overflow-hidden pb-[40px] px-[38px] pr-[40px] justify-between`} style={{
             height: `${300 + totalParticipants * 50}px`,
         }} >
-            <img src={data.stageStatus === "off_stage" ? topElement : topElementOnstage} alt="topElement" className='absolute top-0 left-0 w-full max-w-[70px]' />
-            <img src={data.stageStatus === "off_stage" ? rightElement : rightElementOnstage} alt="rightElement" className='absolute bottom-0 right-0 z-10 max-w-[50px]' />
-            <img src={data.stageStatus === "off_stage" ? bottomElement : bottomElementOnstage} alt="bottomElement" className='absolute bottom-0 left-0 right-0 w-full ' />
 
-            <img src={blur1} className=" absolute top-28 left-0 w-24  " />
-            <img src={blur3} className="absolute  left-2/4 right-0 bottom-0 w-36" />
-            <img src={blur2} className="absolute  top-0 right-1/4 w-36" />
+            <img src={data.stageStatus ? topElement : topElementOnstage} alt="topElement" className='absolute top-0 left-0 w-full max-w-[70px]' />
+            <img src={data.stageStatus ? rightElement : rightElementOnstage} alt="rightElement" className='absolute bottom-0 right-0 z-10 max-w-[50px]' />
+            <img src={data.stageStatus ? bottomElement : bottomElementOnstage} alt="bottomElement" className='absolute bottom-0 left-0 right-0 w-full ' />
+
+            <img src={data.stageStatus ? blur4 : blur1} className=" absolute top-28 left-0 w-24  " />
+            <img src={data.stageStatus ? blur6 : blur3} className="absolute  left-2/4 right-0 bottom-0 w-36 -z-10" />
+            <img src={data.stageStatus ? blur5 : blur2} className="absolute  top-0 right-1/4 w-36" />
 
             <div className="flex justify-between flex-col h-full">
                 <div className="flex-1">
@@ -98,14 +102,14 @@ function index({ data }) {
                         <img src={KalamaLogo} alt="" className="w-8" />
                     </div>
                     <div className='flex items-end relative justify-center' >
-                        <img src={data.stageStatus === "off_stage" ? resultTxt : resultTxtOnstage} alt="" className='w-24 pt-4' />
+                        <img src={data.stageStatus ? resultTxt : resultTxtOnstage} alt="" className='w-24 pt-4' />
                         <div className="-ml-4 ">
-                            <div className='bg-orange-500  h-4 w-4 rounded-full flex items-center justify-center text-white font-bold text-[6px] '>
+                            <div className={`${data.stageStatus  ? 'bg-[#c3e04f]' : 'bg-orange-500 '} h-4 w-4 rounded-full flex items-center justify-center text-white font-bold text-[6px] `}>
                                 <span>{ResultNumber(data.result_no)}</span>
                             </div>
                         </div>
                     </div>
-                    <div className='bg-[#220440] text-white px-2 py-1  mt-3 max-w-[220px] text-[14px] text-center mx-auto'>
+                    <div className={`${data.stageStatus  ? 'bg-[#276692]' : 'bg-[#220440] '} text-white px-2 py-1  mt-3 max-w-[220px] text-[14px] text-center mx-auto`}>
                         <span className={classNames('text-[14px] font-semibold text-center',
                             {
                                 'text-[12px] ': data.programName.length > 20,
@@ -126,7 +130,7 @@ function index({ data }) {
                                     {winner.groups && winner.groups.length > 0 ? (
                                         winner.groups.map((group, groupIndex) => (
                                             <div key={groupIndex} className="text-left">
-                                                <p className="text-[12px] font-bold leading-none">
+                                                <p className="text-[12px] text-orange-400 font-bold leading-none">
                                                     {group.name}
                                                 </p>
                                                 <p className="text-[2px] line-clamp-1">

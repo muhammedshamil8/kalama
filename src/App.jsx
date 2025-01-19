@@ -18,7 +18,7 @@ const routes = [
         element: <Result />,
       },
       {
-        path: "schedule",
+        path: "schedule/:dateState",
         element: <Schedule />,
       },
       {
