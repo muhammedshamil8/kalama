@@ -245,12 +245,12 @@ function Index() {
                         key={index}
                         onClick={() => handleProgramSelect(program)}
                         style={{ backgroundColor: colors[index % colors.length] }}
-                        className='bg-[#605F5F] border-[1.6px] cursor-pointer border-b-[4px] border-borderColor px-4 py-1 text-white font-semibold rounded-none shadow-md flex items-center justify-center leading-5 relative'
+                        className='bg-[#605F5F] border-[1.6px] cursor-pointer border-b-[4px] hover:border-b-[2px] border-borderColor px-4 py-1 text-white font-semibold rounded-none shadow-md flex items-center justify-center leading-5 relative'
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 20 }}
                         transition={{ duration: 0.4 }}
-                        whileHover={{ scale: 1.1 }}
+                        // whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.95 }}
                       >
                         {extractValidText(program?.name)}

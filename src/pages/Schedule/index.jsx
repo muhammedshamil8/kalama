@@ -52,6 +52,7 @@ function Schedule() {
   const handleSearchChange = (e) => {
     if (e.target.value === "") {
       setSelectedDate(Object.keys(eventData)[0]);
+      setSearchTerm("");
       document.getElementById('search').value = "";
       // document.getElementById('search').innerHTML = "";
     } else {
@@ -80,6 +81,20 @@ function Schedule() {
       )
     );
   });
+
+  function getDateByProgramName(programName, eventData) {
+    for (const [date, data] of Object.entries(eventData)) {
+      for (const stage of data.stages) {
+        for (const program of stage.programs) {
+          if (program.name.toLowerCase() === programName.toLowerCase()) {
+            return date; // Return the date if a match is found
+          }
+        }
+      }
+    }
+    return null; // Return null if no match is found
+  }
+  
 
   const handleDateSelect = (date) => {
     setSearchTerm("");
@@ -165,6 +180,7 @@ function Schedule() {
                         <div className="p-2 text-center text-white cursor-pointer bg-black mb-1">
                           <h2 className="text-md font-bold pb-0">{stage.name}</h2>
                           <p className="text-2xl font-black uppercase">{stage.stage}</p>
+                          <p className="text-sm  text-gray-400 mt-1">{getDateByProgramName(stage.programs[0].name, eventData)}</p>
                         </div>
 
                         {/* Program List */}
