@@ -176,7 +176,7 @@ function Index() {
                         </div>
                     </div>
                     <div>
-                        <h1 className='  font-semibold right-0 whitespace-nowrap text-[54px] leading-[1px] -ml-[30%]'>
+                        <h1 className='  font-semibold right-0 whitespace-nowrap text-[54px] leading-[1px]'>
                             Score Board
                         </h1>
                     </div>
