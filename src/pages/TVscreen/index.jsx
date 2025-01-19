@@ -6,6 +6,7 @@ import PosterTab from './components/PosterTab';
 import { Avatar_bl, Avatar_br } from '@/assets/elements';
 import QrCode from '@/assets/qrcode.svg'
 import { useAutoAnimate } from '@formkit/auto-animate/react';
+import TvPoster from '@/pages/TVscreen/PosterPage';
 
 function Index() {
     const [colleges, setColleges] = useState([]);
@@ -30,12 +31,12 @@ function Index() {
         fetchData();
     }, 30000);
 
-    // const intervalId2 = setInterval(() => {
-    //     setShowPoster(!showPoster);
-    // }, 1000 * (showPoster ? 60 : 20));
+    const intervalId2 = setInterval(() => {
+        setShowPoster(!showPoster);
+    }, 1000 * (showPoster ? 10 : 30));
 
     // Cleanup the interval when the component is unmounted or the effect re-runs
-    return () => clearInterval(intervalId);
+    return () => clearInterval(intervalId, intervalId2);
 }, [showPoster]);
 
     const fetchData = async () => {
@@ -216,7 +217,7 @@ function Index() {
 
                 <div ref={parent}>
                 {showPoster ? (
-                    <>Posters Slider</>
+                    <TvPoster />
                 ) : (
                 <main className="flex justify-around items-start w-full gap-10 px-4 pt-6">
                         <div className="flex justify-center w-full mx-auto sm:px-0 px-4 flex-1">
