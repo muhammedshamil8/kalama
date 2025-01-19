@@ -184,7 +184,7 @@ function Index() {
                         <img src={Logo_GloryBoard} alt="Product Logo" className="mx-auto max-w-[20vw]" />
                     </div>
                 </div>
-                <main className="flex justify-around items-start w-full gap-24 px-4 pt-6">
+                <main className="flex justify-around items-start w-full gap-16 px-4 pt-6">
                         <div className="flex justify-center w-full mx-auto sm:px-0 px-4 flex-1">
                             <CollegeTab data={colleges} />
                         </div>
