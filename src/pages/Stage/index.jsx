@@ -24,7 +24,8 @@ function Stage() {
           <div className={`text-center font-bold mb-1  ${(id) % 2 === 0 ? 'bg-[#605F5F]' : 'bg-black'} text-white p-4`}>
             <h1 className='text-2xl'>{stage.name || 'Stage Name'}</h1>
             <span className='text-md font-normal text-gray-400 mb-1'>{date || 'Date'}</span>
-            <h1 className="text-md">{stage.location || 'location'}</h1>
+            {stage?.location && <h1 className="text-md">{stage.location || 'location'}</h1>}
+            {/* <h1 className="text-md">{stage.location || 'location'}</h1> */}
           </div>
           <div className="max-w-[500px] mx-auto space-y-4 border border-borderColor p-2">
             {stage.programs.length > 0 ? (
