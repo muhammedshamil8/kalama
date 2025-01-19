@@ -79,7 +79,7 @@ function index({ college }) {
                     </div>
                 </div>
                 <div className='flex-1 w-full flex flex-col gap-1 '>
-                    <p className="font-semibold leading-4 min-h-[42px]">{college.collegeName} </p>
+                    <p className="font-semibold leading-4 min-h-[42px] break-all">{college.collegeName} </p>
                     <hr className={`border-[1.5px] mb-[1px] ${pickBorderColor(college.rank)}`} />
                     <div className='flex items-end justify-end'>
                         <span className={`flex items-center justify-center px-2 py-[1px]  text-white font-bold rounded-none  
