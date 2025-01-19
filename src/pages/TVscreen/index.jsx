@@ -15,11 +15,19 @@ function Index() {
     const ApiUrl = import.meta.env.VITE_API_URL;
     const [PosterLoading, setPosterLoading] = useState(true);
 
-    
+
     useEffect(() => {
-        // Fetching Data concurrently
+    // Fetching Data concurrently
+    fetchData();
+
+    // Setting an interval to refetch data every 30 seconds (30000ms)
+    const intervalId = setInterval(() => {
         fetchData();
-    }, []);
+    }, 30000);
+
+    // Cleanup the interval when the component is unmounted or the effect re-runs
+    return () => clearInterval(intervalId);
+}, []);
 
     const fetchData = async () => {
             setLoading(true);
