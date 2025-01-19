@@ -27,6 +27,7 @@ function Index() {
   const [individuals, setIndividuals] = useState([]);
   const [individualAllRounder, setIndividualAllRounder] = useState([]);
 
+
   const [loading, setLoading] = useState(true);
   const ApiUrl = import.meta.env.VITE_API_URL;
 

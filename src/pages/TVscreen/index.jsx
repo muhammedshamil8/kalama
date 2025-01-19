@@ -5,6 +5,8 @@ import { Logo_aikiam, Logo_kalama, Logo_kaloolsavm, Logo_GloryBoard } from "@/as
 import PosterTab from './components/PosterTab';
 import { Avatar_bl, Avatar_br } from '@/assets/elements';
 import QrCode from '@/assets/qrcode.svg'
+import { useAutoAnimate } from '@formkit/auto-animate/react';
+import TvPoster from '@/pages/TVscreen/PosterPage';
 
 function Index() {
     const [colleges, setColleges] = useState([]);
@@ -14,6 +16,10 @@ function Index() {
     const [filteredPrograms, setFilteredPrograms] = useState([]);
     const ApiUrl = import.meta.env.VITE_API_URL;
     const [PosterLoading, setPosterLoading] = useState(true);
+
+    const [showPoster, setShowPoster] = useState(false);
+
+     const [parent] = useAutoAnimate()
 
 
     useEffect(() => {
@@ -25,9 +31,13 @@ function Index() {
         fetchData();
     }, 30000);
 
+    const intervalId2 = setInterval(() => {
+        setShowPoster(!showPoster);
+    }, 1000 * (showPoster ? 10 : 30));
+
     // Cleanup the interval when the component is unmounted or the effect re-runs
-    return () => clearInterval(intervalId);
-}, []);
+    return () => clearInterval(intervalId, intervalId2);
+}, [showPoster]);
 
     const fetchData = async () => {
             setLoading(true);
@@ -177,45 +187,49 @@ function Index() {
                     </div>
                     <div>
                         <h1 className='  font-semibold right-0 whitespace-nowrap text-[54px] leading-[1px]'>
-                            Score Board
+                            {showPoster ? "Results" : "Score Board"}
                         </h1>
                     </div>
-                    <div>
-                        <img src={Logo_GloryBoard} alt="Product Logo" className="mx-auto max-w-[20vw]" />
-                    </div>
-                </div>
-                <main className="flex justify-around items-start w-full gap-10 px-4 pt-6">
-                        <div className="flex justify-center w-full mx-auto sm:px-0 px-4 flex-1">
-                            <CollegeTab data={colleges} />
-                        </div>
-                    {/* <section className="w-full max-w-[800px]  px-4 flex flex-col gap-12">
-                        <div className="flex justify-center w-full mx-auto sm:px-0 " >
-                            <PosterTab data={programs} loading={PosterLoading} />
-                        </div>
+                    <div >
+                        {/* <img src={Logo_GloryBoard} alt="Product Logo" className="mx-auto max-w-[20vw]" /> */}
+                        
                         <div className='bg-customBlue text-white rounded-xl max-w-[400px] mx-auto flex border border-customBlue mt-10 overflow-hidden' style={{ boxShadow: '0px 2px 14px 2px rgba(0, 0, 0, 0.25)' }}>
-                            <div className='p-3 flex flex-col items-center justify-center gap-1 text-center'>
+                            <div className='p-2 flex flex-col items-center justify-center gap-1 text-center'>
                                 <div>
                                     <h1 className='text-lg font-bold '>Scan the QR Code
                                     </h1>
                                     <h3 className='text-md font-medium '>to Explore More</h3>
                                 </div>
 
-                                <p className='text-sm'>Quick, Easy, and Hassle-Free!</p>
-                                <div className='mt-2'>
+                                <div className='mt-1'>
                                     <p className='text-sm'>Visit Website:
                                     </p>
                                     <div className='bg-white px-2 text-customBlue max-w-fit mx-auto font-semibold'>czonekalama.in</div>
                                 </div>
                             </div>
                             <div className='bg-white p-3'>
-                                <img src={QrCode} alt='qr code' />
+                                <img src={QrCode} width={100} height={100} alt='qr code' />
                             </div>
                         </div>
-                    </section> */}
+                    </div>
+                </div>
+
+
+                <div ref={parent}>
+                {showPoster ? (
+                    <TvPoster />
+                ) : (
+                <main className="flex justify-around items-start w-full gap-10 px-4 pt-6">
+                        <div className="flex justify-center w-full mx-auto sm:px-0 px-4 flex-1">
+                            <CollegeTab data={colleges} />
+                        </div>
                         <div className="flex justify-center w-full mx-auto sm:px-0 px-4 flex-1">
                             <IndividualTab data={individuals} />
                         </div>
                 </main>
+                )}
+                </div>
+
 
                 <img src={Avatar_bl} alt="Bottom Left Avatar" className="absolute bottom-0 left-0 w-full max-w-[25vw]" />
                 <img src={Avatar_br} alt="Bottom Right Avatar" className="absolute bottom-0 right-0 w-full max-w-[25vw]" />
